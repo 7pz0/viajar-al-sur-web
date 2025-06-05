@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://viajaral sur.vercel.app/sitemap.xml
+
+# Block access to sensitive files
+Disallow: /package.json
+Disallow: /vercel.json
+Disallow: /.git/
+Disallow: /node_modules/

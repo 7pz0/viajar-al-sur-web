@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Viajar al Sur - Turismo Auténtico en el Sur de Chile</title>
+    <meta name="description" content="Descubre el auténtico sur de Chile con Viajar al Sur. Tours organizados, alojamientos con encanto y experiencias únicas en paisajes naturales únicos.">    <meta name="keywords" content="turismo sur chile, tours chile, alojamiento sur chile, viajes patagonia, turismo aventura, cabañas chile, hostales sur">
+    <meta name="author" content="Viajar al Sur">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tu-proyecto.vercel.app/">
+    <meta property="og:title" content="Viajar al Sur - Turismo Auténtico en el Sur de Chile">
+    <meta property="og:description" content="Descubre el auténtico sur de Chile con Viajar al Sur. Tours organizados, alojamientos con encanto y experiencias únicas en paisajes naturales únicos.">
+    <meta property="og:image" content="https://tu-proyecto.vercel.app/assets/og-image.jpg">
+    <meta property="og:locale" content="es_CL">
+    <meta property="og:site_name" content="Viajar al Sur">
+      <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tu-proyecto.vercel.app/">
+    <meta property="twitter:title" content="Viajar al Sur - Turismo Auténtico en el Sur de Chile">
+    <meta property="twitter:description" content="Descubre el auténtico sur de Chile con Viajar al Sur. Tours organizados, alojamientos con encanto y experiencias únicas en paisajes naturales únicos.">
+    <meta property="twitter:image" content="https://tu-proyecto.vercel.app/assets/og-image.jpg">
+      <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#3b82f6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Viajar al Sur">
+    
+    <!-- Favicons and Icons -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/android-chrome-512x512.png">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Microsoft Tiles -->
+    <meta name="msapplication-TileColor" content="#3b82f6">
+    <meta name="msapplication-config" content="assets/browserconfig.xml">
+      <!-- CSS -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/main.css">
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav__container">
+                <div class="nav__logo">
+                    <h1>Viajar al Sur</h1>
+                </div>
+                <ul class="nav__menu">
+                    <li><a href="#home" class="nav__link">Inicio</a></li>
+                    <li><a href="#about" class="nav__link">Acerca</a></li>
+                    <li><a href="#services" class="nav__link">Servicios</a></li>
+                    <li><a href="#contact" class="nav__link">Contacto</a></li>
+                </ul>
+                <button class="nav__toggle" aria-label="Abrir menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero__content">
+                    <h1 class="hero__title">Bienvenido a Viajar al Sur</h1>
+                    <p class="hero__description">Explora lo auténtico del sur de Chile con rutas, cultura y experiencias únicas.</p>                    <div class="hero__buttons">
+                        <button class="btn btn--primary">Explorar rutas</button>
+                        <a href="https://wa.me/56912345678?text=Hola%20Viajar%20al%20Sur,%20me%20interesa%20conocer%20más%20sobre%20sus%20tours%20y%20experiencias%20en%20el%20sur%20de%20Chile" 
+                           class="btn btn--whatsapp" target="_blank" rel="noopener">
+                            <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488"/>
+                            </svg>
+                            WhatsApp Business
+                        </a>
+                    </div>
+                    <p class="hero__whatsapp-note">💬 Te respondemos dentro del mismo día</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section__title">Acerca del Proyecto</h2>
+                <div class="about__grid">
+                    <div class="about__item">
+                        <div class="about__icon">🧭</div>
+                        <h3>Auténtico</h3>
+                        <p>Viajamos con identidad local, no con guías genéricos.</p>
+                    </div>
+                    <div class="about__item">
+                        <div class="about__icon">🌿</div>
+                        <h3>Conectado con la naturaleza</h3>
+                        <p>Experiencias en paisajes únicos y poco explorados.</p>
+                    </div>
+                    <div class="about__item">
+                        <div class="about__icon">🧑‍🤝‍🧑</div>
+                        <h3>Cercano y profesional</h3>
+                        <p>Atención personalizada con logística bien resuelta.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services">
+            <div class="container">
+                <h2 class="section__title">Nuestros Servicios</h2>
+                <div class="services__grid">
+                    <div class="service-card">
+                        <h3>Tours organizados</h3>
+                        <p>Itinerarios diseñados para parejas, grupos o adultos mayores.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Alojamientos con encanto</h3>
+                        <p>Cabañas, hostales y hoteles locales con experiencia auténtica.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Transporte y logística</h3>
+                        <p>Te ayudamos a llegar, moverte y disfrutar sin complicaciones.</p>
+                    </div>
+                </div>
+            </div>
+        </section>        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section__title">Contacto</h2>
+                
+                <!-- WhatsApp Contact Card -->
+                <div class="whatsapp-contact">
+                    <div class="whatsapp-contact__content">
+                        <div class="whatsapp-contact__icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488"/>
+                            </svg>
+                        </div>
+                        <div class="whatsapp-contact__text">
+                            <h3>¿Tienes dudas? ¡Escríbenos!</h3>
+                            <p>Cuéntanos qué tipo de experiencia buscas y te ayudamos a planificar tu viaje perfecto</p>
+                            <p class="whatsapp-contact__response">⏱️ Te respondemos dentro del mismo día</p>
+                        </div>
+                        <a href="https://wa.me/56912345678?text=Hola%20Viajar%20al%20Sur,%20quiero%20consultar%20sobre%20sus%20servicios%20turísticos.%20Me%20interesa%20conocer%20qué%20tipo%20de%20experiencias%20ofrecen." 
+                           class="btn btn--whatsapp btn--large" target="_blank" rel="noopener">
+                            Escribir por WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <div class="contact-divider">
+                    <span>O si prefieres, completa el formulario</span>
+                </div>
+
+                <form class="contact__form">
+                    <div class="form__group">
+                        <input type="text" id="name" name="name" placeholder="Tu nombre" required>
+                    </div>
+                    <div class="form__group">
+                        <input type="email" id="email" name="email" placeholder="Tu email" required>
+                    </div>
+                    <div class="form__group">
+                        <textarea id="message" name="message" placeholder="Tu mensaje" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn--primary">Enviar Mensaje</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Viajar al Sur. Todos los derechos reservados.</p>
+        </div>    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/56956471214?text=Hola%20Viajar%20al%20Sur,%20me%20gustaría%20obtener%20información%20sobre%20sus%20tours%20y%20servicios." 
+           class="whatsapp-float__btn" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+            <svg class="whatsapp-float__icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488"/>
+            </svg>
+            <div class="whatsapp-float__tooltip">¡Escríbenos!</div>
+        </a>
+    </div>    <!-- JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/services/emailService.js"></script>
+    <script src="js/components/navigation.js"></script>
+    <script src="js/components/form.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

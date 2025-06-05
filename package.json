@@ -1,0 +1,32 @@
+{  "name": "viajar-al-sur-web",
+  "version": "1.0.0",
+  "description": "Sitio web oficial de Viajar al Sur - Turismo auténtico en el sur de Chile",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 3000",
+    "build": "echo 'Build complete - static files ready'",
+    "start": "python -m http.server 8000",
+    "lint": "echo 'Linting JavaScript files...'",
+    "test": "echo 'Running tests...'",
+    "deploy": "vercel --prod"
+  },  "keywords": [
+    "turismo",
+    "chile",
+    "sur de chile",
+    "tours",
+    "alojamiento",
+    "viajes",
+    "patagonia",
+    "web",
+    "responsive"
+  ],  "author": "Viajar al Sur",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tu-usuario/viajar-al-sur-web.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tu-usuario/mi-proyecto-web/issues"
+  },
+  "homepage": "https://tu-proyecto.vercel.app"
+}
