@@ -3,12 +3,11 @@
  * Handles email sending functionality through EmailJS
  */
 
-class EmailService {
-    constructor() {
-        // EmailJS configuration
-        this.serviceId = 'service_qofvbee';
-        this.templateId = 'template_g33e509';
-        this.publicKey = 'xKGDXjgj-othuhpVc'; // Replace with your actual public key
+class EmailService {    constructor() {
+        // EmailJS configuration - UPDATE WITH YOUR CREDENTIALS
+        this.serviceId = 'service_qofvbee'; // Reemplaza con tu Service ID real
+        this.templateId = 'template_g33e509'; // Reemplaza con tu Template ID real
+        this.publicKey = 'xKGDXjgj-othuhpVc'; // Reemplaza con tu Public Key real
         
         // Initialize EmailJS
         this.init();
@@ -33,7 +32,7 @@ class EmailService {
      * Test EmailJS connection and configuration
      */
     testEmailJSConnection() {
-        if (this.publicKey === 'YOUR_EMAILJS_PUBLIC_KEY') {
+        if (this.publicKey === 'xKGDXjgj-othuhpVc') {
             console.warn('EmailJS not configured. Please update the public key in emailService.js');
             return false;
         }
@@ -58,12 +57,13 @@ class EmailService {
             // Validate form data
             if (!this.validateFormData(formData)) {
                 throw new Error('Datos del formulario inválidos');
-            }
-
-            // Prepare template parameters
+            }            // Prepare template parameters for Cloudflare Email Routing
             const templateParams = {
                 from_name: formData.name,
                 from_email: formData.email,
+                phone: formData.phone || 'No especificado',
+                destination: formData.destination || 'No especificado',
+                travel_date: formData.date || 'No especificado',
                 message: formData.message,
                 to_email: 'contacto@viajaralsur.cl',
                 reply_to: formData.email,
