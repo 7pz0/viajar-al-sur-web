@@ -1,5 +1,13 @@
 {
   "version": 2,
+  "buildCommand": "echo 'Build complete - static files ready'",
+  "outputDirectory": ".",
+  "builds": [
+    {
+      "src": "**/*",
+      "use": "@vercel/static"
+    }
+  ],
   "trailingSlash": false,
   "cleanUrls": true,
   "redirects": [
