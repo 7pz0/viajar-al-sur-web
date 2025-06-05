@@ -31,13 +31,16 @@ class EmailService {
 
     /**
      * Test EmailJS connection and configuration
-     */
-    testEmailJSConnection() {
-        if (this.publicKey === 'xKGDXjgj-othuhpVc') {
-            console.warn('EmailJS not configured. Please update the public key in emailService.js');
+     */    testEmailJSConnection() {
+        // Check if using placeholder values
+        if (this.publicKey === 'YOUR_EMAILJS_PUBLIC_KEY' || 
+            this.serviceId === 'YOUR_SERVICE_ID' || 
+            this.templateId === 'YOUR_TEMPLATE_ID') {
+            console.warn('EmailJS not configured. Please update the credentials in emailService.js');
             return false;
         }
-          // EmailJS is ready
+        
+        // EmailJS is ready
         return true;
     }
 
