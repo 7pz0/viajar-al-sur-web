@@ -3,7 +3,8 @@
  * Handles email sending functionality through EmailJS
  */
 
-class EmailService {    constructor() {
+class EmailService {
+    constructor() {
         // EmailJS configuration - UPDATE WITH YOUR CREDENTIALS
         this.serviceId = 'service_qofvbee'; // Reemplaza con tu Service ID real
         this.templateId = 'template_g33e509'; // Reemplaza con tu Template ID real
@@ -36,10 +37,11 @@ class EmailService {    constructor() {
             console.warn('EmailJS not configured. Please update the public key in emailService.js');
             return false;
         }
-        
-        // EmailJS is ready
+          // EmailJS is ready
         return true;
-    }    /**
+    }
+
+    /**
      * Send email using EmailJS
      * @param {Object} formData - Form data object
      * @param {string} formData.name - Sender name
@@ -57,7 +59,9 @@ class EmailService {    constructor() {
             // Validate form data
             if (!this.validateFormData(formData)) {
                 throw new Error('Datos del formulario inválidos');
-            }            // Prepare template parameters for Cloudflare Email Routing
+            }
+
+            // Prepare template parameters for Cloudflare Email Routing
             const templateParams = {
                 from_name: formData.name,
                 from_email: formData.email,
