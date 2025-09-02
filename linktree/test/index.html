@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario Responsive - Viajar al Sur</title>
+  <style>
+    /* Paleta de colores */
+    :root {
+      --azul-cielo: #4aa8e0;
+      --turquesa-agua: #2ec6b3;
+      --naranja-calido: #ff7b54;
+      --amarillo-ocre: #f4a261;
+      --rojo-bandera: #e63946;
+      --blanco-nieve: #ffffff;
+      --negro-tipografico: #000000;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: var(--blanco-nieve);
+      color: var(--negro-tipografico);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .form-container {
+      width: 100%;
+      max-width: 800px;
+      background: var(--blanco-nieve);
+      border: 3px solid var(--turquesa-agua);
+      border-radius: 12px;
+      box-shadow: 0px 6px 20px rgba(0,0,0,0.15);
+      padding: 20px;
+    }
+
+    .form-container h1 {
+      text-align: center;
+      color: var(--rojo-bandera);
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+
+    .image-upload {
+      border: 2px dashed var(--azul-cielo);
+      border-radius: 10px;
+      background: #f9f9f9;
+      padding: 25px;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .image-upload input {
+      display: none;
+    }
+
+    .image-upload label {
+      color: var(--azul-cielo);
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .section {
+      background: var(--naranja-calido);
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      color: var(--blanco-nieve);
+    }
+
+    .section:nth-of-type(2) {
+      background: var(--amarillo-ocre);
+    }
+
+    .section textarea {
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 14px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      color: var(--blanco-nieve);
+      background: var(--turquesa-agua);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background: var(--azul-cielo);
+    }
+
+    /* Responsivo */
+    @media (min-width: 600px) {
+      .form-container {
+        padding: 30px;
+      }
+
+      .form-container h1 {
+        font-size: 2rem;
+      }
+
+      .section textarea {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Formulario de Viaje</h1>
+    
+    <!-- Subir imagen -->
+    <div class="image-upload">
+      <input type="file" id="imageInput" accept="image/*">
+      <label for="imageInput">Haz clic aquí para subir una imagen</label>
+    </div>
+
+    <!-- Sección de texto 1 -->
+    <div class="section">
+      <textarea rows="4" placeholder="Escribe el primer párrafo..."></textarea>
+    </div>
+
+    <!-- Sección de texto 2 -->
+    <div class="section">
+      <textarea rows="4" placeholder="Escribe el segundo párrafo..."></textarea>
+    </div>
+
+    <!-- Sección de texto 3 -->
+    <div class="section">
+      <textarea rows="4" placeholder="Escribe el tercer párrafo..."></textarea>
+    </div>
+
+    <!-- Botón -->
+    <button class="submit-btn">Enviar</button>
+  </div>
+</body>
+</html>
