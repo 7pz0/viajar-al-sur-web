@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Subir Imagen a Cloudinary</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 30px auto;
+      text-align: center;
+    }
+    img {
+      max-width: 100%;
+      margin-top: 15px;
+      border-radius: 10px;
+      box-shadow: 0px 2px 6px rgba(0,0,0,0.3);
+    }
+    #status {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    #url-container {
+      display: none; /* oculto hasta que haya una subida exitosa */
+      margin-top: 15px;
+    }
+    #uploaded-url {
+      width: 80%;
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    #copy-btn {
+      margin-left: 8px;
+      padding: 8px 12px;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: white;
+    }
+    #copy-btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h2>📤 Subir imagen a Cloudinary</h2>
+
+  <!-- Formulario para seleccionar un archivo -->
+  <form id="upload-form">
+    <input type="file" id="file-input" accept="image/*">
+    <button type="submit">Subir</button>
+  </form>
+
+  <!-- Contenedor para vista previa -->
+  <div id="preview-container"></div>
+
+  <!-- Estado del proceso -->
+  <p id="status"></p>
+
+  <!-- Contenedor de URL y botón copiar -->
+  <div id="url-container">
+    <input type="text" id="uploaded-url" readonly>
+    <button id="copy-btn">Copiar</button>
+  </div>
+
+  <script>
+    const form = document.getElementById('upload-form');
+    const status = document.getElementById('status');
+    const previewContainer = document.getElementById('preview-container');
+    const fileInput = document.getElementById('file-input');
+    const urlContainer = document.getElementById('url-container');
+    const uploadedUrl = document.getElementById('uploaded-url');
+    const copyBtn = document.getElementById('copy-btn');
+
+    // 👉 Configuración de tu cuenta Cloudinary
+    const CLOUD_NAME = "dmmhkbgox";        // Tu "cloud name"
+    const UPLOAD_PRESET = "prueba";        // Tu upload preset (unsigned)
+    const URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`;
+
+    // Vista previa de la imagen seleccionada
+    fileInput.addEventListener('change', () => {
+      previewContainer.innerHTML = "";
+      urlContainer.style.display = "none"; // ocultar URL si seleccionas otra imagen
+      const file = fileInput.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = document.createElement("img");
+          img.src = e.target.result;
+          previewContainer.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Subida a Cloudinary
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const file = fileInput.files[0];
+      if (!file) {
+        status.textContent = "⚠️ Por favor selecciona un archivo";
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", UPLOAD_PRESET);
+      formData.append("folder", "test");
+
+      status.textContent = "⏳ Subiendo...";
+
+      try {
+        const res = await fetch(URL, {
+          method: "POST",
+          body: formData
+        });
+        const data = await res.json();
+
+        if (data.secure_url) {
+          status.textContent = "✅ Subida exitosa";
+          uploadedUrl.value = data.secure_url;   // poner la URL en el input
+          urlContainer.style.display = "block"; // mostrar contenedor de URL
+        } else {
+          status.textContent = "❌ Error: " + JSON.stringify(data);
+        }
+      } catch (err) {
+        status.textContent = "❌ Error al subir la imagen";
+      }
+    });
+
+    // Copiar la URL al portapapeles
+    copyBtn.addEventListener("click", () => {
+      uploadedUrl.select();
+      document.execCommand("copy");
+      copyBtn.textContent = "✅ Copiado!";
+      setTimeout(() => copyBtn.textContent = "Copiar", 2000); // volver al texto original
+    });
+  </script>
+</body>
+</html>
