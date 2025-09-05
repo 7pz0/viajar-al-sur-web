@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro - Viajar al Sur</title>
+</head>
+<body>
+  <h2>Registro con Imagen - Viajar al Sur</h2>
+
+  <!-- Formulario para nombre, email y archivo -->
+  <form id="myForm">
+    <input type="text" id="name" placeholder="Tu nombre" required><br><br>
+    <input type="email" id="email" placeholder="Tu email" required><br><br>
+    <input type="file" id="image" accept="image/*" required><br><br>
+    <!-- Previsualización de la imagen -->
+    <img id="preview" src="" alt="Vista previa" style="max-width:200px; display:none;"><br><br>
+    <button type="submit">Guardar</button>
+  </form>
+
+  <p id="status"></p>
+
+  <!-- SDKs de Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-storage.js"></script>
+
+  <script>
+    // 🔹 Configuración real de Firebase para viajaralsur
+    const firebaseConfig = {
+      apiKey: "AIzaSyAn4aEuwIBv21bQK3qfKaUhszVuFeEmJvw",
+      authDomain: "viajaralsur.firebaseapp.com",
+      projectId: "viajaralsur",
+      storageBucket: "viajaralsur.firebasestorage.app",
+      messagingSenderId: "927613299224",
+      appId: "1:927613299224:web:9ef767c182b20569dff16d",
+      measurementId: "G-3CQSZQ04DJ"
+    };
+
+    // Inicializar Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore(app);
+    const storage = firebase.storage(app);
+
+    // Elementos del formulario y vista previa
+    const form = document.getElementById("myForm");
+    const status = document.getElementById("status");
+    const preview = document.getElementById("preview");
+    const imageInput = document.getElementById("image");
+
+    // Previsualizar la imagen seleccionada
+    imageInput.addEventListener("change", () => {
+      const file = imageInput.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          preview.src = e.target.result;
+          preview.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+      } else {
+        preview.src = "";
+        preview.style.display = "none";
+      }
+    });
+
+    // Manejar envío del formulario
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const imageFile = imageInput.files[0];
+
+      if (!imageFile) {
+        status.textContent = "❌ Por favor selecciona una imagen";
+        return;
+      }
+
+      status.textContent = "⏳ Subiendo imagen...";
+
+      try {
+        // Subir imagen a Firebase Storage
+        const storageRef = storage.ref().child(`usuarios/${Date.now()}_${imageFile.name}`);
+        const snapshot = await storageRef.put(imageFile);
+        const imageUrl = await snapshot.ref.getDownloadURL();
+
+        status.textContent = "⏳ Guardando datos en Firestore...";
+
+        // Guardar documento en Firestore
+        await db.collection("usuarios").add({
+          nombre: name,
+          correo: email,
+          fecha: new Date(),
+          imagen: imageUrl
+        });
+
+        status.textContent = "✅ Datos y imagen guardados correctamente";
+        form.reset();
+        preview.src = "";
+        preview.style.display = "none";
+
+      } catch (error) {
+        status.textContent = "❌ Error: " + error.message;
+      }
+    });
+  </script>
+</body>
+</html>
