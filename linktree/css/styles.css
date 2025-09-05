@@ -84,7 +84,7 @@ body {
 .links-container {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;  /* Reducido de 15px - puedes ajustar este valor */
 }
 
 .link-button {
