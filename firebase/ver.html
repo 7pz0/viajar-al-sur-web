@@ -2,67 +2,178 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Ver datos - Viajar al Sur</title>
+  <title>Ver Registros - Viajar al Sur</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 50px auto;
+      max-width: 900px;
+      margin: 30px auto;
       padding: 20px;
+      background-color: #f5f5f5;
+    }
+    
+    .header {
+      text-align: center;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    
+    h2 {
+      color: #333;
+      margin: 0;
+    }
+    
+    .stats {
+      margin-top: 10px;
+      color: #666;
+      font-size: 14px;
     }
     
     .usuario-card {
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 15px;
-      margin-bottom: 15px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
     }
     
-    .usuario-card img {
-      border-radius: 5px;
-      margin-top: 10px;
+    .usuario-info {
+      flex: 1;
+    }
+    
+    .usuario-image {
+      flex-shrink: 0;
+    }
+    
+    .usuario-image img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 3px solid #ddd;
+    }
+    
+    .usuario-info h3 {
+      margin: 0 0 10px 0;
+      color: #2c3e50;
+      font-size: 20px;
+    }
+    
+    .usuario-info p {
+      margin: 5px 0;
+      color: #555;
+    }
+    
+    .usuario-info strong {
+      color: #333;
+    }
+    
+    .fecha {
+      color: #7f8c8d;
+      font-size: 14px;
     }
     
     .loading {
       text-align: center;
       color: #666;
       font-style: italic;
+      padding: 40px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     
     .error {
       background-color: #f8d7da;
       color: #721c24;
       border: 1px solid #f5c6cb;
-      padding: 15px;
-      border-radius: 5px;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
     }
     
     .no-data {
       text-align: center;
       color: #666;
       font-style: italic;
-      padding: 20px;
+      padding: 40px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     
-    h2 {
-      color: #333;
-      border-bottom: 2px solid #4CAF50;
-      padding-bottom: 10px;
+    .refresh-btn {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-left: 15px;
+      font-size: 14px;
+    }
+    
+    .refresh-btn:hover {
+      background-color: #2980b9;
+    }
+    
+    .back-btn {
+      background-color: #95a5a6;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 15px;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+    }
+    
+    .back-btn:hover {
+      background-color: #7f8c8d;
+    }
+    
+    /* Responsive */
+    @media (max-width: 600px) {
+      .usuario-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .usuario-image img {
+        width: 120px;
+        height: 120px;
+      }
     }
   </style>
 </head>
 <body>
-  <h2>Usuarios registrados - Viajar al Sur</h2>
+  <div class="header">
+    <h2>📋 Usuarios Registrados - Viajar al Sur</h2>
+    <div class="stats">
+      <span id="total-usuarios">Cargando...</span>
+      <a href="index.html" class="back-btn">← Nuevo Registro</a>
+      <button class="refresh-btn" onclick="cargarUsuarios()">🔄 Actualizar</button>
+    </div>
+  </div>
 
   <!-- Contenedor donde se mostrarán los usuarios -->
   <div id="usuarios">
-    <div class="loading">Cargando usuarios...</div>
+    <div class="loading">
+      <p>🔄 Cargando usuarios...</p>
+    </div>
   </div>
 
-  <!-- Firebase v9 SDKs con sintaxis modular -->
+  <!-- Firebase v9 SDKs -->
   <script type="module">
-    // Importar las funciones necesarias de Firebase
+    // Importar Firebase
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js';
     import { getFirestore, collection, getDocs, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js';
 
@@ -82,61 +193,127 @@
     const db = getFirestore(app);
 
     const container = document.getElementById("usuarios");
+    const totalUsuarios = document.getElementById("total-usuarios");
 
     // Función para formatear fecha
     function formatearFecha(timestamp) {
       if (!timestamp) return "Fecha no disponible";
       
-      // Si es un Timestamp de Firebase
-      if (timestamp.toDate) {
-        return timestamp.toDate().toLocaleString('es-ES');
+      try {
+        let fecha;
+        
+        // Si es un Timestamp de Firebase
+        if (timestamp.toDate) {
+          fecha = timestamp.toDate();
+        }
+        // Si es un objeto Date
+        else if (timestamp instanceof Date) {
+          fecha = timestamp;
+        }
+        // Si es una cadena ISO
+        else if (typeof timestamp === 'string') {
+          fecha = new Date(timestamp);
+        }
+        else {
+          return "Fecha no válida";
+        }
+        
+        return fecha.toLocaleString('es-ES', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+      } catch (error) {
+        console.error("Error al formatear fecha:", error);
+        return "Error en fecha";
       }
-      
-      // Si es un objeto Date
-      if (timestamp instanceof Date) {
-        return timestamp.toLocaleString('es-ES');
-      }
-      
-      return "Fecha no válida";
     }
 
-    // Leer todos los documentos de la colección "usuarios"
+    // Función para cargar usuarios
     async function cargarUsuarios() {
       try {
-        const q = query(collection(db, "usuarios"), orderBy("fecha", "desc"));
+        console.log("Cargando usuarios desde Firebase...");
+        container.innerHTML = '<div class="loading"><p>🔄 Cargando usuarios...</p></div>';
+        
+        // Crear consulta ordenada por fecha (más reciente primero)
+        const q = query(
+          collection(db, "usuarios"), 
+          orderBy("fechaRegistro", "desc")
+        );
+        
         const querySnapshot = await getDocs(q);
         
+        console.log("Documentos encontrados:", querySnapshot.size);
         container.innerHTML = ""; // Limpiar contenido
 
         if (querySnapshot.empty) {
-          container.innerHTML = '<div class="no-data">No hay usuarios registrados.</div>';
+          container.innerHTML = `
+            <div class="no-data">
+              <h3>📭 No hay usuarios registrados</h3>
+              <p>Sé el primero en registrarte</p>
+              <a href="index.html" class="refresh-btn">Registrarse</a>
+            </div>
+          `;
+          totalUsuarios.textContent = "0 usuarios registrados";
         } else {
+          let contador = 0;
+          
           querySnapshot.forEach((doc) => {
-            const data = doc.data();
-            const div = document.createElement("div");
-            div.className = "usuario-card";
+            try {
+              const data = doc.data();
+              console.log("Procesando usuario:", data);
+              
+              contador++;
+              const div = document.createElement("div");
+              div.className = "usuario-card";
 
-            div.innerHTML = `
-              <p><strong>Nombre:</strong> ${data.nombre || 'No especificado'}</p>
-              <p><strong>Email:</strong> ${data.correo || 'No especificado'}</p>
-              <p><strong>Fecha:</strong> ${formatearFecha(data.fecha)}</p>
-              <p><strong>ID:</strong> ${doc.id}</p>
-              ${data.imagen ? 
-                `<div><strong>Imagen:</strong><br><img src="${data.imagen}" alt="Imagen de ${data.nombre}" style="max-width:150px;"></div>` : 
-                '<p><em>Sin imagen</em></p>'
-              }
-            `;
-            container.appendChild(div);
+              div.innerHTML = `
+                <div class="usuario-info">
+                  <h3>👤 ${data.nombre || 'Sin nombre'}</h3>
+                  <p><strong>📧 Email:</strong> ${data.correo || 'No especificado'}</p>
+                  <p><strong>📅 Fecha de registro:</strong> ${formatearFecha(data.fechaRegistro)}</p>
+                  <p><strong>🆔 ID:</strong> <code>${doc.id}</code></p>
+                  ${data.fechaCreacion ? `<p class="fecha">Respaldo: ${formatearFecha(data.fechaCreacion)}</p>` : ''}
+                </div>
+                <div class="usuario-image">
+                  ${data.imagenUrl ? 
+                    `<img src="${data.imagenUrl}" alt="Foto de ${data.nombre}" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgZmlsbD0iI2Y1ZjVmNSIvPjxwYXRoIGQ9Ik0xMiAxMmMxLjY1NjkgMCAzLTEuMzQzMSAzLTNzLTEuMzQzMS0zLTMtMy0zIDEuMzQzMS0zIDNzMS4zNDMxIDMgMyAzem0wIDEuNWMtMi4wMDc2IDAtNiAxLjAwMzgtNiAzdjEuNWgxMnYtMS41YzAtMS45OTYyLTMuOTkyNC0zLTYtM3oiIGZpbGw9IiM5OTkiLz48L3N2Zz4='; this.alt='Imagen no disponible';">` : 
+                    '<div style="width: 150px; height: 150px; background: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #999;">📷<br>Sin imagen</div>'
+                  }
+                </div>
+              `;
+              container.appendChild(div);
+            } catch (error) {
+              console.error("Error al procesar usuario:", error);
+            }
           });
+          
+          totalUsuarios.textContent = `${contador} usuario${contador !== 1 ? 's' : ''} registrado${contador !== 1 ? 's' : ''}`;
         }
+        
       } catch (error) {
         console.error("Error al cargar usuarios:", error);
-        container.innerHTML = `<div class="error">❌ Error al leer datos: ${error.message}</div>`;
+        container.innerHTML = `
+          <div class="error">
+            <h3>❌ Error al cargar datos</h3>
+            <p>Error: ${error.message}</p>
+            <button class="refresh-btn" onclick="cargarUsuarios()">🔄 Intentar de nuevo</button>
+          </div>
+        `;
+        totalUsuarios.textContent = "Error al cargar";
       }
     }
 
+    // Hacer la función global para el botón
+    window.cargarUsuarios = cargarUsuarios;
+
     // Cargar usuarios al iniciar la página
     cargarUsuarios();
+    
+    // Auto-actualizar cada 30 segundos
+    setInterval(cargarUsuarios, 30000);
   </script>
 </body>
 </html>

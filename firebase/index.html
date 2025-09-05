@@ -9,13 +9,30 @@
       max-width: 600px;
       margin: 50px auto;
       padding: 20px;
+      background-color: #f5f5f5;
+    }
+    
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    h2 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 30px;
     }
     
     input, button {
-      padding: 10px;
-      margin: 5px 0;
+      padding: 12px;
+      margin: 8px 0;
       width: 100%;
       box-sizing: border-box;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
     }
     
     button {
@@ -23,22 +40,31 @@
       color: white;
       border: none;
       cursor: pointer;
+      font-weight: bold;
     }
     
     button:hover {
       background-color: #45a049;
     }
     
+    button:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+    
     #preview {
-      margin: 10px 0;
+      margin: 15px 0;
       border: 1px solid #ddd;
       border-radius: 5px;
+      max-width: 100%;
     }
     
     #status {
       margin-top: 20px;
-      padding: 10px;
+      padding: 15px;
       border-radius: 5px;
+      text-align: center;
+      font-weight: bold;
     }
     
     .success {
@@ -61,26 +87,29 @@
   </style>
 </head>
 <body>
-  <h2>Registro con Imagen - Viajar al Sur V0.2</h2>
+  <div class="container">
+    <h2>📸 Registro con Imagen - Viajar al Sur</h2>
 
-  <!-- Formulario para nombre, email y archivo -->
-  <form id="myForm">
-    <input type="text" id="name" placeholder="Tu nombre" required><br>
-    <input type="email" id="email" placeholder="Tu email" required><br>
-    <input type="file" id="image" accept="image/*" required><br>
-    <!-- Previsualización de la imagen -->
-    <img id="preview" src="" alt="Vista previa" style="max-width:200px; display:none;"><br>
-    <button type="submit">Guardar</button>
-  </form>
+    <!-- Formulario para nombre, email y archivo -->
+    <form id="myForm">
+      <input type="text" id="name" placeholder="Tu nombre" required>
+      <input type="email" id="email" placeholder="Tu email" required>
+      <input type="file" id="image" accept="image/*" required>
+      
+      <!-- Previsualización de la imagen -->
+      <img id="preview" src="" alt="Vista previa" style="display:none;">
+      
+      <button type="submit" id="submitBtn">Guardar</button>
+    </form>
 
-  <div id="status"></div>
+    <div id="status"></div>
+  </div>
 
-  <!-- Firebase v9 SDKs con sintaxis modular -->
+  <!-- Firebase v9 SDKs -->
   <script type="module">
-    // Importar las funciones necesarias de Firebase
+    // Importar Firebase
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js';
     import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js';
-    import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-storage.js';
 
     // Configuración de Firebase
     const firebaseConfig = {
@@ -93,32 +122,21 @@
       measurementId: "G-3CQSZQ04DJ"
     };
 
+    // Configuración de Cloudinary
+    const CLOUD_NAME = "dmmhkbgox";
+    const UPLOAD_PRESET = "prueba";
+    const CLOUDINARY_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`;
+
     // Inicializar Firebase
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-    const storage = getStorage(app);
 
-    // Elementos del formulario y vista previa
+    // Elementos del DOM
     const form = document.getElementById("myForm");
     const status = document.getElementById("status");
     const preview = document.getElementById("preview");
     const imageInput = document.getElementById("image");
-
-    // Previsualizar la imagen seleccionada
-    imageInput.addEventListener("change", () => {
-      const file = imageInput.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          preview.src = e.target.result;
-          preview.style.display = "block";
-        };
-        reader.readAsDataURL(file);
-      } else {
-        preview.src = "";
-        preview.style.display = "none";
-      }
-    });
+    const submitBtn = document.getElementById("submitBtn");
 
     // Función para mostrar estado
     function mostrarEstado(mensaje, tipo) {
@@ -126,78 +144,127 @@
       status.className = tipo;
     }
 
+    // Previsualizar imagen seleccionada
+    imageInput.addEventListener("change", () => {
+      const file = imageInput.files[0];
+      if (file) {
+        // Verificar tamaño (máximo 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+          mostrarEstado("❌ La imagen es demasiado grande. Máximo 5MB.", "error");
+          imageInput.value = "";
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          preview.src = e.target.result;
+          preview.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+        mostrarEstado("", ""); // Limpiar estado
+      } else {
+        preview.src = "";
+        preview.style.display = "none";
+      }
+    });
+
+    // Función para subir imagen a Cloudinary
+    async function subirImagenCloudinary(file) {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", UPLOAD_PRESET);
+      formData.append("folder", "viajaralsur/usuarios");
+
+      const response = await fetch(CLOUDINARY_URL, {
+        method: "POST",
+        body: formData
+      });
+
+      if (!response.ok) {
+        throw new Error("Error al subir imagen a Cloudinary");
+      }
+
+      const data = await response.json();
+      
+      if (!data.secure_url) {
+        throw new Error("No se obtuvo URL de Cloudinary");
+      }
+
+      return data.secure_url;
+    }
+
     // Manejar envío del formulario
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const name = document.getElementById("name").value;
-      const email = document.getElementById("email").value;
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
       const imageFile = imageInput.files[0];
 
-      if (!imageFile) {
-        mostrarEstado("❌ Por favor selecciona una imagen", "error");
+      // Validaciones
+      if (!name || !email || !imageFile) {
+        mostrarEstado("❌ Por favor completa todos los campos", "error");
         return;
       }
 
-      console.log("Iniciando proceso de subida...");
-      console.log("Archivo:", imageFile.name, "Tamaño:", imageFile.size, "bytes");
-
-      mostrarEstado("⏳ Subiendo imagen...", "loading");
+      // Deshabilitar botón y mostrar progreso
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Procesando...";
 
       try {
-        // Verificar tamaño del archivo (max 5MB)
-        if (imageFile.size > 5 * 1024 * 1024) {
-          throw new Error("La imagen es demasiado grande. Máximo 5MB.");
-        }
-
-        // Subir imagen a Firebase Storage
-        const timestamp = Date.now();
-        const fileName = `usuarios/${timestamp}_${imageFile.name}`;
-        console.log("Subiendo a:", fileName);
+        // Paso 1: Subir imagen a Cloudinary
+        mostrarEstado("⏳ Subiendo imagen a Cloudinary...", "loading");
+        console.log("Subiendo imagen:", imageFile.name, imageFile.size, "bytes");
         
-        const storageRef = ref(storage, fileName);
-        
-        console.log("Iniciando uploadBytes...");
-        const snapshot = await uploadBytes(storageRef, imageFile);
-        console.log("Upload completado, obteniendo URL...");
-        
-        const imageUrl = await getDownloadURL(snapshot.ref);
-        console.log("URL obtenida:", imageUrl);
+        const imageUrl = await subirImagenCloudinary(imageFile);
+        console.log("Imagen subida exitosamente:", imageUrl);
 
-        mostrarEstado("⏳ Guardando datos en Firestore...", "loading");
+        // Paso 2: Guardar datos en Firebase
+        mostrarEstado("⏳ Guardando datos en Firebase...", "loading");
+        console.log("Guardando en Firebase:", { name, email, imageUrl });
 
-        // Guardar documento en Firestore
-        console.log("Guardando en Firestore...");
         const docRef = await addDoc(collection(db, "usuarios"), {
           nombre: name,
           correo: email,
-          fecha: serverTimestamp(),
-          imagen: imageUrl
+          fechaRegistro: serverTimestamp(),
+          imagenUrl: imageUrl,
+          fechaCreacion: new Date().toISOString() // Fecha adicional como respaldo
         });
-        console.log("Documento guardado con ID:", docRef.id);
 
-        mostrarEstado("✅ Datos y imagen guardados correctamente", "success");
+        console.log("Documento guardado con ID:", docRef.id);
+        
+        // Éxito
+        mostrarEstado("✅ ¡Registro completado exitosamente!", "success");
+        
+        // Resetear formulario
         form.reset();
         preview.src = "";
         preview.style.display = "none";
 
+        // Opcional: redirigir a la página de visualización después de 2 segundos
+        setTimeout(() => {
+          if (confirm("¿Quieres ver todos los registros?")) {
+            window.location.href = "ver.html";
+          }
+        }, 2000);
+
       } catch (error) {
         console.error("Error completo:", error);
-        console.error("Código de error:", error.code);
-        console.error("Mensaje:", error.message);
         
         let mensajeError = "Error desconocido";
-        if (error.code === 'storage/unauthorized') {
-          mensajeError = "Sin permisos para subir archivos. Revisa las reglas de Storage.";
+        if (error.message.includes("Cloudinary")) {
+          mensajeError = "Error al subir imagen. Verifica tu conexión.";
         } else if (error.code === 'permission-denied') {
-          mensajeError = "Sin permisos para guardar datos. Revisa las reglas de Firestore.";
-        } else if (error.code === 'storage/unknown') {
-          mensajeError = "Error de Storage. Verifica la configuración.";
+          mensajeError = "Sin permisos para guardar datos en Firebase.";
         } else {
           mensajeError = error.message;
         }
         
-        mostrarEstado("❌ Error: " + mensajeError, "error");
+        mostrarEstado("❌ " + mensajeError, "error");
+      } finally {
+        // Rehabilitar botón
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Guardar";
       }
     });
   </script>
