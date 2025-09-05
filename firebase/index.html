@@ -3,29 +3,86 @@
 <head>
   <meta charset="UTF-8">
   <title>Registro - Viajar al Sur</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+    
+    input, button {
+      padding: 10px;
+      margin: 5px 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    
+    button:hover {
+      background-color: #45a049;
+    }
+    
+    #preview {
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    
+    #status {
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    
+    .success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    
+    .error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    
+    .loading {
+      background-color: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+  </style>
 </head>
 <body>
   <h2>Registro con Imagen - Viajar al Sur</h2>
 
   <!-- Formulario para nombre, email y archivo -->
   <form id="myForm">
-    <input type="text" id="name" placeholder="Tu nombre" required><br><br>
-    <input type="email" id="email" placeholder="Tu email" required><br><br>
-    <input type="file" id="image" accept="image/*" required><br><br>
+    <input type="text" id="name" placeholder="Tu nombre" required><br>
+    <input type="email" id="email" placeholder="Tu email" required><br>
+    <input type="file" id="image" accept="image/*" required><br>
     <!-- Previsualización de la imagen -->
-    <img id="preview" src="" alt="Vista previa" style="max-width:200px; display:none;"><br><br>
+    <img id="preview" src="" alt="Vista previa" style="max-width:200px; display:none;"><br>
     <button type="submit">Guardar</button>
   </form>
 
-  <p id="status"></p>
+  <div id="status"></div>
 
-  <!-- SDKs de Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-storage.js"></script>
+  <!-- Firebase v9 SDKs con sintaxis modular -->
+  <script type="module">
+    // Importar las funciones necesarias de Firebase
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js';
+    import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js';
+    import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.12.3/firebase-storage.js';
 
-  <script>
-    // 🔹 Configuración real de Firebase para viajaralsur
+    // Configuración de Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyAn4aEuwIBv21bQK3qfKaUhszVuFeEmJvw",
       authDomain: "viajaralsur.firebaseapp.com",
@@ -37,9 +94,9 @@
     };
 
     // Inicializar Firebase
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore(app);
-    const storage = firebase.storage(app);
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
 
     // Elementos del formulario y vista previa
     const form = document.getElementById("myForm");
@@ -63,6 +120,12 @@
       }
     });
 
+    // Función para mostrar estado
+    function mostrarEstado(mensaje, tipo) {
+      status.textContent = mensaje;
+      status.className = tipo;
+    }
+
     // Manejar envío del formulario
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -72,35 +135,39 @@
       const imageFile = imageInput.files[0];
 
       if (!imageFile) {
-        status.textContent = "❌ Por favor selecciona una imagen";
+        mostrarEstado("❌ Por favor selecciona una imagen", "error");
         return;
       }
 
-      status.textContent = "⏳ Subiendo imagen...";
+      mostrarEstado("⏳ Subiendo imagen...", "loading");
 
       try {
         // Subir imagen a Firebase Storage
-        const storageRef = storage.ref().child(`usuarios/${Date.now()}_${imageFile.name}`);
-        const snapshot = await storageRef.put(imageFile);
-        const imageUrl = await snapshot.ref.getDownloadURL();
+        const timestamp = Date.now();
+        const fileName = `usuarios/${timestamp}_${imageFile.name}`;
+        const storageRef = ref(storage, fileName);
+        
+        const snapshot = await uploadBytes(storageRef, imageFile);
+        const imageUrl = await getDownloadURL(snapshot.ref);
 
-        status.textContent = "⏳ Guardando datos en Firestore...";
+        mostrarEstado("⏳ Guardando datos en Firestore...", "loading");
 
         // Guardar documento en Firestore
-        await db.collection("usuarios").add({
+        await addDoc(collection(db, "usuarios"), {
           nombre: name,
           correo: email,
-          fecha: new Date(),
+          fecha: serverTimestamp(),
           imagen: imageUrl
         });
 
-        status.textContent = "✅ Datos y imagen guardados correctamente";
+        mostrarEstado("✅ Datos y imagen guardados correctamente", "success");
         form.reset();
         preview.src = "";
         preview.style.display = "none";
 
       } catch (error) {
-        status.textContent = "❌ Error: " + error.message;
+        console.error("Error completo:", error);
+        mostrarEstado("❌ Error: " + error.message, "error");
       }
     });
   </script>
