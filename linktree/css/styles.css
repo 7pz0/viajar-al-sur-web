@@ -103,7 +103,7 @@ body {
 
 .link-button:hover {
     transform: scale(1.02);
-    filter: brightness(140%);
+    filter: brightness(80%);
 }
 
 .link-button i {
