@@ -139,26 +139,42 @@
         return;
       }
 
+      console.log("Iniciando proceso de subida...");
+      console.log("Archivo:", imageFile.name, "Tamaño:", imageFile.size, "bytes");
+
       mostrarEstado("⏳ Subiendo imagen...", "loading");
 
       try {
+        // Verificar tamaño del archivo (max 5MB)
+        if (imageFile.size > 5 * 1024 * 1024) {
+          throw new Error("La imagen es demasiado grande. Máximo 5MB.");
+        }
+
         // Subir imagen a Firebase Storage
         const timestamp = Date.now();
         const fileName = `usuarios/${timestamp}_${imageFile.name}`;
+        console.log("Subiendo a:", fileName);
+        
         const storageRef = ref(storage, fileName);
         
+        console.log("Iniciando uploadBytes...");
         const snapshot = await uploadBytes(storageRef, imageFile);
+        console.log("Upload completado, obteniendo URL...");
+        
         const imageUrl = await getDownloadURL(snapshot.ref);
+        console.log("URL obtenida:", imageUrl);
 
         mostrarEstado("⏳ Guardando datos en Firestore...", "loading");
 
         // Guardar documento en Firestore
-        await addDoc(collection(db, "usuarios"), {
+        console.log("Guardando en Firestore...");
+        const docRef = await addDoc(collection(db, "usuarios"), {
           nombre: name,
           correo: email,
           fecha: serverTimestamp(),
           imagen: imageUrl
         });
+        console.log("Documento guardado con ID:", docRef.id);
 
         mostrarEstado("✅ Datos y imagen guardados correctamente", "success");
         form.reset();
@@ -167,7 +183,21 @@
 
       } catch (error) {
         console.error("Error completo:", error);
-        mostrarEstado("❌ Error: " + error.message, "error");
+        console.error("Código de error:", error.code);
+        console.error("Mensaje:", error.message);
+        
+        let mensajeError = "Error desconocido";
+        if (error.code === 'storage/unauthorized') {
+          mensajeError = "Sin permisos para subir archivos. Revisa las reglas de Storage.";
+        } else if (error.code === 'permission-denied') {
+          mensajeError = "Sin permisos para guardar datos. Revisa las reglas de Firestore.";
+        } else if (error.code === 'storage/unknown') {
+          mensajeError = "Error de Storage. Verifica la configuración.";
+        } else {
+          mensajeError = error.message;
+        }
+        
+        mostrarEstado("❌ Error: " + mensajeError, "error");
       }
     });
   </script>
