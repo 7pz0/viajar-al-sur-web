@@ -51,7 +51,7 @@ body {
 .logo-container {
     width: 150px;
     height: 150px;
-    margin: 0 auto 30px;
+    margin: 0 auto 15px;
     border-radius: 50%;
     padding: 10px;
     background: rgba(255, 255, 255, 0.1);
