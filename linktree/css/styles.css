@@ -14,7 +14,7 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;
     color: white;
     min-height: 100vh;
     position: relative;
@@ -72,6 +72,13 @@ body {
     padding: 15px;
     border-radius: 10px;
     backdrop-filter: blur(5px);
+    font-weight: 300;
+    line-height: 1.6;
+    letter-spacing: 0.3px;
+}
+
+.description p {
+    font-size: 1.1em;
 }
 
 .links-container {
