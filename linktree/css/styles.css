@@ -54,6 +54,17 @@ body {
     text-align: center;        /* Alineación de texto centrada */
 }
 
+/* Sección de perfil */
+.profile-section {
+    display: flex;           /* Layout flexible */
+    align-items: center;    /* Centrado vertical */
+    gap: 2rem;              /* Espacio entre elementos */
+    background-color: rgba(255, 255, 255, 0.8);  /* Fondo semi-transparente */
+    padding: 2rem;          /* Espacio interior */
+    border-radius: 1rem;    /* Bordes redondeados */
+    margin-bottom: 2rem;    /* Margen inferior */
+}
+
 /* Contenedor del logo */
 .logo-container {
     width: 150px;              /* Ancho fijo */
@@ -64,14 +75,15 @@ body {
     background: rgba(255, 255, 255, 0.1);  /* Fondo semi-transparente */
     backdrop-filter: blur(5px);             /* Efecto de desenfoque */
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Sombra brillante */
+    flex-shrink: 0;            /* Evita que el logo se encoja */
 }
 
 /* Imagen del logo */
 .logo {
-    width: 100%;              /* Ocupa todo el contenedor */
-    height: 100%;
-    object-fit: contain;      /* Mantiene proporciones de la imagen */
-    border-radius: 50%;       /* Forma circular */
+    width: 120px;              /* Ancho del logo */
+    height: 120px;             /* Altura del logo */
+    border-radius: 50%;        /* Forma circular */
+    object-fit: cover;         /* Mantiene proporciones de la imagen */
 }
 
 /* Contenedor de la descripción */
@@ -84,11 +96,15 @@ body {
     font-weight: 300250;      /* Grosor de la fuente */
     line-height: 1.6;         /* Altura de línea */
     letter-spacing: 0.3px;    /* Espaciado entre letras */
+    flex-grow: 1;             /* Ocupa el espacio disponible */
 }
 
 /* Párrafos en la descripción */
 .description p {
-    font-size: 0.9em;        /* Tamaño de texto */
+    margin: 0;                /* Elimina margen */
+    font-size: 1rem;          /* Tamaño de texto */
+    line-height: 1.5;         /* Altura de línea */
+    color: #333;              /* Color de texto */
 }
 
 /* Contenedor de los enlaces */
@@ -146,5 +162,14 @@ body {
 
     .link-button {
         padding: 12px 15px;    /* Reduce padding de botones */
+    }
+}
+
+/* Estilos responsivos para tabletas y pantallas más pequeñas */
+@media (max-width: 768px) {
+    .profile-section {
+        flex-direction: column;  /* Apilado vertical */
+        text-align: center;      /* Texto centrado */
+        gap: 1rem;              /* Espacio entre elementos */
     }
 }
