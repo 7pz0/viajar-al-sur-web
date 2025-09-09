@@ -67,15 +67,15 @@ body {
 
 /* Contenedor del logo */
 .logo-container {
-    width: 150px;              /* Ancho fijo */
-    height: 150px;             /* Altura fija */
-    margin: 0 auto 15px;       /* Centrado y margen inferior */
-    border-radius: 50%;        /* Forma circular */
-    padding: 10px;             /* Espacio interior */
-    background: rgba(255, 255, 255, 0.1);  /* Fondo semi-transparente */
-    backdrop-filter: blur(5px);             /* Efecto de desenfoque */
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Sombra brillante */
-    flex-shrink: 0;            /* Evita que el logo se encoja */
+    width: 140px;              /* Reducido de 150px */
+    height: 140px;             /* Reducido de 150px */
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    flex-shrink: 0;
 }
 
 /* Imagen del logo */
