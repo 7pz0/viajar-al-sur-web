@@ -1,14 +1,18 @@
 /* Definición de variables de colores para uso global */
 :root {
-    --color-dark: #1B1B1E;
-    --instagram-start: #405DE6;  /* Azul Instagram */
-    --instagram-end: #E1306C;    /* Rosa Instagram */
+    /* Colores para gradientes de Instagram */
+    --instagram-start: #405DE6;  
+    --instagram-end: #E1306C;    
+    /* Colores para gradientes de Facebook */
     --facebook-start: #4267B2;
     --facebook-end: #2B4170;
+    /* Colores para gradientes de WhatsApp */
     --whatsapp-start: #25D366;
     --whatsapp-end: #128C7E;
+    /* Colores para gradientes del sitio web */
     --web-start: #52B1E1;
     --web-end: #40E0B5;
+    /* Colores para gradientes del email */
     --email-start: #FF4D6D;
     --email-end: #FF7A5C;
 }
@@ -31,12 +35,12 @@ body {
 
 /* Contenedor para el slideshow de fondo */
 .background-slideshow {
-    position: fixed;            /* Fijo en la pantalla */
+    position: fixed;            /* Mantiene el fondo fijo durante el scroll */
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;               /* Detrás del contenido */
+    width: 100%;               /* Cubre todo el ancho de la ventana */
+    height: 100%;              /* Cubre todo el alto de la ventana */
+    z-index: -1;               /* Asegura que esté detrás del contenido */
 }
 
 /* Estilos para cada imagen del slideshow */
@@ -53,37 +57,37 @@ body {
 
 /* Contenedor principal de la página */
 .container {
-    max-width: 680px;          /* Ancho máximo del contenido */
-    margin: 0 auto;            /* Centrado horizontal */
-    padding: 20px;             /* Espacio interior */
-    text-align: center;        /* Alineación de texto centrada */
+    max-width: 680px;          /* Limita el ancho en pantallas grandes */
+    margin: 0 auto;            /* Centra el contenedor horizontalmente */
+    padding: 20px;             /* Espacio interior uniforme */
+    text-align: center;        /* Alinea el contenido al centro */
 }
 
-/* Sección de perfil */
+/* Sección de perfil con layout flexible */
 .profile-section {
-    display: flex;           /* Layout flexible */
-    align-items: center;    /* Centrado vertical */
-    gap: 2rem;              /* Espacio entre elementos */
-    background-color: rgba(255, 255, 255, 0);  /* Fondo semi-transparente */
-    padding: 0.5rem;          /* Espacio interior */
-    border-radius: 1rem;    /* Bordes redondeados */
-    margin-bottom: 2rem;    /* Margen inferior */
+    display: flex;             /* Habilita el layout flexible */
+    align-items: center;       /* Alinea elementos verticalmente al centro */
+    gap: 2rem;                /* Espacio uniforme entre elementos */
+    background-color: rgba(255, 255, 255, 0);  /* Fondo transparente */
+    padding: 0.5rem;          /* Espaciado interno pequeño */
+    border-radius: 1rem;      /* Bordes redondeados */
+    margin-bottom: 2rem;      /* Espacio debajo de la sección */
 }
 
-/* Contenedor del logo */
+/* Contenedor circular para el logo */
 .logo-container {
-    width: 140px;              /* Reducido de 150px */
-    height: 140px;             /* Reducido de 150px */
-    margin: 0 auto 15px;
-    border-radius: 50%;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-    flex-shrink: 0;
+    width: 140px;              /* Ancho fijo del contenedor */
+    height: 140px;             /* Altura igual al ancho para forma circular */
+    margin: 0 auto;            /* Centrado horizontal */
+    border-radius: 50%;        /* Forma circular */
+    padding: 10px;             /* Espacio interior para el logo */
+    background: rgba(255, 255, 255, 0.1);  /* Fondo semitransparente */
+    backdrop-filter: blur(5px); /* Efecto de desenfoque del fondo */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);  /* Brillo alrededor */
+    flex-shrink: 0;            /* Evita que el contenedor se encoja */
 }
 
-/* Imagen del logo */
+/* Imagen del logo con ajustes específicos */
 .logo {
     width: 120px;              /* Ancho del logo */
     height: 120px;             /* Altura del logo */
@@ -91,20 +95,20 @@ body {
     object-fit: cover;         /* Mantiene proporciones de la imagen */
 }
 
-/* Contenedor de la descripción */
+/* Contenedor de la descripción con efectos visuales */
 .description {
-    margin-bottom: 15px;      /* Espacio inferior */
-    background: rgba(0, 0, 0, 0.5);  /* Fondo semi-transparente */
-    padding: 15px;            /* Espacio interior */
-    border-radius: 10px;      /* Bordes redondeados */
-    backdrop-filter: blur(5px);  /* Efecto de desenfoque */
-    font-weight: 300250;      /* Grosor de la fuente */
-    line-height: 1.6;         /* Altura de línea */
-    letter-spacing: 0.3px;    /* Espaciado entre letras */
-    flex-grow: 1;             /* Ocupa el espacio disponible */
+    margin-bottom: 15px;       /* Espacio inferior */
+    background: rgba(0, 0, 0, 0.5);  /* Fondo oscuro semitransparente */
+    padding: 15px;             /* Espacio interior uniforme */
+    border-radius: 10px;       /* Esquinas redondeadas */
+    backdrop-filter: blur(5px); /* Efecto de desenfoque del fondo */
+    font-weight: 300;          /* Texto ligero */
+    line-height: 1.6;          /* Espaciado entre líneas */
+    letter-spacing: 0.3px;     /* Espaciado entre letras */
+    flex-grow: 1;              /* Ocupa el espacio disponible */
 }
 
-/* Párrafos en la descripción */
+/* Estilos específicos para párrafos en la descripción */
 .description p {
     margin: 0;                /* Elimina margen */
     font-size: 1rem;          /* Tamaño de texto */
@@ -112,14 +116,14 @@ body {
     color: #ffffff;              /* Color de texto */
 }
 
-/* Contenedor de los enlaces */
+/* Contenedor de los enlaces con layout vertical */
 .links-container {
-    display: flex;           /* Layout flexible */
-    flex-direction: column;  /* Apilado vertical */
-    gap: 10px;              /* Espacio entre enlaces */
+    display: flex;             /* Layout flexible */
+    flex-direction: column;    /* Apila elementos verticalmente */
+    gap: 10px;                /* Espacio uniforme entre enlaces */
 }
 
-/* Botones de enlace */
+/* Estilos base para todos los botones de enlace */
 .link-button {
     display: flex;          /* Layout flexible */
     align-items: center;    /* Centrado vertical */
@@ -128,69 +132,74 @@ body {
     text-decoration: none;  /* Elimina subrayado */
     color: white;           /* Color de texto */
     background: linear-gradient(45deg, var(--web-start), var(--web-end)); /* Gradiente */
-    transition: transform 0.3s ease, filter 0.3s ease; /* Transiciones suaves */
+    transition: all 0.3s ease;  /* Simplificar las transiciones múltiples */
     font-size: 1.1em;      /* Tamaño de texto */
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Sombra de texto */
 }
 
-/* Modificar el hover effect */
+/* Efectos al pasar el cursor sobre los botones */
 .link-button:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);    /* Ligero aumento de tamaño */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Sombra suave */
 }
 
-/* Iconos dentro de los botones */
+/* Ajustes para los iconos dentro de los botones */
 .link-button i {
     margin-right: 15px;        /* Espacio a la derecha */
     font-size: 1.5em;          /* Tamaño del icono */
 }
 
-/* Estilos específicos para cada red social */
+/* Estilos específicos para cada red social usando selectores de atributo */
 .link-button[href*="instagram"] {
+    /* Gradiente característico de Instagram */
     background: linear-gradient(45deg, 
-        #833ab4 0%,   /* Morado */
-        #fd1d1d 50%, /* Rojo */
-        #f56040 100% /* Naranja */
+        #833ab4 0%,   /* Color inicial morado */
+        #fd1d1d 50%,  /* Color medio rojo */
+        #f56040 100%  /* Color final naranja */
     );
 }
 
+/* Gradiente personalizado para Facebook */
 .link-button[href*="facebook"] {
     background: linear-gradient(45deg, var(--facebook-start), var(--facebook-end));
 }
 
+/* Gradiente personalizado para WhatsApp */
 .link-button[href*="wa.me"] {
     background: linear-gradient(45deg, var(--whatsapp-start), var(--whatsapp-end));
 }
 
+/* Gradiente personalizado para el sitio web */
 .link-button[href*="viajaralsur.cl"]:not([href*="@"]) {
     background: linear-gradient(45deg, var(--web-start), var(--web-end));
 }
 
+/* Gradiente personalizado para el email */
 .link-button[href*="mailto"] {
     background: linear-gradient(45deg, var(--email-start), var(--email-end));
 }
 
-/* Estilos responsivos para móviles */
+/* Ajustes responsivos para dispositivos móviles */
 @media (max-width: 480px) {
     .container {
-        padding: 15px;         /* Reduce el padding */
+        padding: 15px;         /* Reduce el espacio en móviles */
     }
 
     .logo-container {
-        width: 120px;          /* Reduce tamaño del logo */
-        height: 120px;
+        width: 120px;          /* Logo más pequeño en móviles */
+        height: 120px;         /* Mantiene la proporción cuadrada */
     }
 
     .link-button {
-        padding: 12px 15px;    /* Reduce padding de botones */
+        padding: 12px 15px;    /* Botones más compactos en móviles */
     }
 }
 
-/* Estilos responsivos para tabletas y pantallas más pequeñas */
+/* Ajustes responsivos para tablets */
 @media (max-width: 768px) {
     .profile-section {
-        flex-direction: column;  /* Apilado vertical */
-        text-align: center;      /* Texto centrado */
-        gap: 1rem;              /* Espacio entre elementos */
+        flex-direction: column;  /* Cambia a layout vertical */
+        text-align: center;      /* Centra el texto */
+        gap: 1rem;              /* Reduce el espacio entre elementos */
     }
 }
