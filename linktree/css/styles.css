@@ -156,7 +156,16 @@ body {
 
 /* Estilos específicos para cada red social */
 .link-button[href*="instagram"] {
-    background: linear-gradient(45deg, var(--instagram-start), var(--instagram-end));
+    background: linear-gradient(45deg, 
+        #405DE6,  /* Azul */
+        #5B51D8,  /* Morado */
+        #833AB4,  /* Morado */
+        #C13584,  /* Rosa oscuro */
+        #E1306C,  /* Rosa */
+        #FD1D1D,  /* Rojo */
+        #F56040,  /* Naranja */
+        #F77737   /* Naranja claro */
+    );
 }
 
 .link-button[href*="facebook"] {
