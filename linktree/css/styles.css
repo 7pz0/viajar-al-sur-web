@@ -208,6 +208,18 @@ body {
     .link-button {
         padding: 12px 15px;    /* Botones más compactos en móviles */
     }
+
+    .description {
+        font-size: 0.9rem;        /* Reduce el tamaño de fuente */
+        padding: 10px;            /* Reduce el padding para más espacio útil */
+        width: 100%;             /* Usa todo el ancho disponible */
+        max-width: none;         /* Elimina cualquier límite de ancho máximo */
+    }
+
+    .description p {
+        font-size: 0.9rem;       /* Ajusta el tamaño de texto de los párrafos */
+        line-height: 1.4;        /* Ajusta el espaciado entre líneas */
+    }
 }
 
 /* Ajustes responsivos para tablets */
