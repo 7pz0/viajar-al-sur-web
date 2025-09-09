@@ -1,8 +1,8 @@
 /* Definición de variables de colores para uso global */
 :root {
     --color-dark: #1B1B1E;
-    --instagram-start: #833AB4;
-    --instagram-end: #E1306C;
+    --instagram-start: #405DE6;  /* Azul Instagram */
+    --instagram-end: #E1306C;    /* Rosa Instagram */
     --facebook-start: #4267B2;
     --facebook-end: #2B4170;
     --whatsapp-start: #25D366;
