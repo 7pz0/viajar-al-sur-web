@@ -89,23 +89,26 @@ body {
 
 /* Contenedor circular para el logo */
 .logo-container {
-    width: 140px;              /* Ancho fijo del contenedor */
-    height: 140px;             /* Altura igual al ancho para forma circular */
-    margin: 0 auto;            /* Centrado horizontal */
-    border-radius: 50%;        /* Forma circular */
-    padding: 10px;             /* Espacio interior para el logo */
-    background: rgba(255, 255, 255, 0.1);  /* Fondo semitransparente */
-    backdrop-filter: blur(5px); /* Efecto de desenfoque del fondo */
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);  /* Brillo alrededor */
-    flex-shrink: 0;            /* Evita que el contenedor se encoja */
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
+    border-radius: 50%;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    flex-shrink: 0;
+    display: flex;           /* Agregado para centrar el logo */
+    align-items: center;     /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
 }
 
 /* Imagen del logo con ajustes específicos */
 .logo {
-    width: 120px;              /* Ancho del logo */
-    height: 120px;             /* Altura del logo */
-    border-radius: 50%;        /* Forma circular */
-    object-fit: cover;         /* Mantiene proporciones de la imagen */
+    width: calc(100% - 20px);  /* Ancho adaptativo considerando el padding */
+    height: calc(100% - 20px); /* Alto adaptativo considerando el padding */
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 /* Contenedor de la descripción con efectos visuales */
@@ -133,8 +136,8 @@ body {
 .links-container {
     display: flex;
     flex-direction: column;
-    gap: 1rem;               /* Cambiado de 10px a 1rem para mantener consistencia */
-    margin-top: 1rem;        /* Agregado para mantener espaciado uniforme */
+    gap: 0.5rem;            /* Reducido de 1rem a 0.5rem */
+    margin-top: 1rem;
 }
 
 /* Estilos base para todos los botones de enlace */
@@ -201,8 +204,14 @@ body {
     }
 
     .logo-container {
-        width: 120px;          /* Logo más pequeño en móviles */
-        height: 120px;         /* Mantiene la proporción cuadrada */
+        width: 120px;
+        height: 120px;
+        padding: 8px;        /* Reducido de 10px a 8px */
+    }
+
+    .logo {
+        width: calc(100% - 16px);   /* Ajustado al nuevo padding */
+        height: calc(100% - 16px);  /* Ajustado al nuevo padding */
     }
 
     .link-button {
@@ -219,6 +228,10 @@ body {
     .description p {
         font-size: 0.9rem;       /* Ajusta el tamaño de texto de los párrafos */
         line-height: 1.4;        /* Ajusta el espaciado entre líneas */
+    }
+
+    .links-container {
+        gap: 0.4rem;        /* Aún más compacto en móviles */
     }
 }
 
