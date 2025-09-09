@@ -28,6 +28,9 @@
     /* Colores para gradientes del email */
     --email-start: #FF4D6D;
     --email-end: #FF7A5C;
+    /* Colores para gradientes de YouTube */
+    --youtube-start: #FF0000;    /* Rojo YouTube */
+    --youtube-end: #CC0000;      /* Rojo oscuro YouTube */
 }
 
 /* Reset básico de estilos para todos los elementos */
@@ -195,6 +198,11 @@ body {
 /* Gradiente personalizado para el email */
 .link-button[href*="mailto"] {
     background: linear-gradient(45deg, var(--email-start), var(--email-end));
+}
+
+/* Gradiente personalizado para YouTube */
+.link-button[href*="youtube"] {
+    background: linear-gradient(45deg, var(--youtube-start), var(--youtube-end));
 }
 
 /* Ajustes responsivos para dispositivos móviles */
