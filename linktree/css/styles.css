@@ -139,15 +139,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Variaciones de color para botones alternos */
-.link-button:nth-child(2n) {
-    background: linear-gradient(45deg, var(--color-orange), var(--color-salmon));
-}
-
-.link-button:nth-child(3n) {
-    background: linear-gradient(45deg, var(--color-pink), var(--color-orange));
-}
-
 /* Iconos dentro de los botones */
 .link-button i {
     margin-right: 15px;        /* Espacio a la derecha */
