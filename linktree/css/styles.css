@@ -1,11 +1,16 @@
 /* Definición de variables de colores para uso global */
 :root {
-    --color-dark: #1B1B1E;      /* Color oscuro para fondos */
-    --color-blue: #52B1E1;      /* Color azul para gradientes */
-    --color-turquoise: #40E0B5; /* Color turquesa para gradientes */
-    --color-orange: #FF7A5C;    /* Color naranja para gradientes */
-    --color-salmon: #FFB396;    /* Color salmón para gradientes */
-    --color-pink: #FF4D6D;      /* Color rosa para gradientes */
+    --color-dark: #1B1B1E;
+    --instagram-start: #833AB4;
+    --instagram-end: #E1306C;
+    --facebook-start: #4267B2;
+    --facebook-end: #2B4170;
+    --whatsapp-start: #25D366;
+    --whatsapp-end: #128C7E;
+    --web-start: #52B1E1;
+    --web-end: #40E0B5;
+    --email-start: #FF4D6D;
+    --email-end: #FF7A5C;
 }
 
 /* Reset básico de estilos para todos los elementos */
@@ -122,7 +127,7 @@ body {
     border-radius: 10px;    /* Bordes redondeados */
     text-decoration: none;  /* Elimina subrayado */
     color: white;           /* Color de texto */
-    background: linear-gradient(45deg, var(--color-blue), var(--color-turquoise)); /* Gradiente */
+    background: linear-gradient(45deg, var(--web-start), var(--web-end)); /* Gradiente */
     transition: transform 0.3s ease, filter 0.3s ease; /* Transiciones suaves */
     font-size: 1.1em;      /* Tamaño de texto */
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Sombra de texto */
@@ -147,6 +152,27 @@ body {
 .link-button i {
     margin-right: 15px;        /* Espacio a la derecha */
     font-size: 1.5em;          /* Tamaño del icono */
+}
+
+/* Estilos específicos para cada red social */
+.link-button[href*="instagram"] {
+    background: linear-gradient(45deg, var(--instagram-start), var(--instagram-end));
+}
+
+.link-button[href*="facebook"] {
+    background: linear-gradient(45deg, var(--facebook-start), var(--facebook-end));
+}
+
+.link-button[href*="wa.me"] {
+    background: linear-gradient(45deg, var(--whatsapp-start), var(--whatsapp-end));
+}
+
+.link-button[href*="viajaralsur.cl"]:not([href*="@"]) {
+    background: linear-gradient(45deg, var(--web-start), var(--web-end));
+}
+
+.link-button[href*="mailto"] {
+    background: linear-gradient(45deg, var(--email-start), var(--email-end));
 }
 
 /* Estilos responsivos para móviles */
