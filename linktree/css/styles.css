@@ -156,7 +156,13 @@ body {
 
 /* Estilos específicos para cada red social */
 .link-button[href*="instagram"] {
-    background: linear-gradient(45deg, #833AB4, #FD1D1D, #F77737);
+    background: radial-gradient(circle at 30% 107%, 
+        #fdf497 0%, 
+        #fdf497 5%, 
+        #fd5949 45%,
+        #d6249f 60%,
+        #285AEB 90%
+    );
 }
 
 .link-button[href*="facebook"] {
