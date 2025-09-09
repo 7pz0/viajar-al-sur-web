@@ -1,3 +1,16 @@
+/*
+ * Estilos para la página de enlaces de Viajar al Sur
+ * Versión: 1.0
+ * Descripción: Define los estilos visuales para una página de tipo Linktree
+ * que incluye un logo, descripción y botones de enlace a redes sociales.
+ * Características:
+ * - Diseño responsivo
+ * - Efectos de desenfoque (backdrop-filter)
+ * - Gradientes personalizados para cada red social
+ * - Animaciones en hover
+ * - Slideshow de fondo
+ */
+
 /* Definición de variables de colores para uso global */
 :root {
     /* Colores para gradientes de Instagram */
@@ -170,7 +183,8 @@ body {
 }
 
 /* Gradiente personalizado para el sitio web */
-.link-button[href*="viajaralsur.cl"]:not([href*="@"]) {
+/*Eliminado este estilo*/
+/*.link-button[href*="viajaralsur.cl"]:not([href*="@"]) {
     background: linear-gradient(45deg, var(--web-start), var(--web-end));
 }
 
