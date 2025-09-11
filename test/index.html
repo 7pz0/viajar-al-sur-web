@@ -6,7 +6,43 @@
     <title>Swiper.js Examples</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
     <style>
-        /* ... Estilos anteriores ... */
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .swiper {
+            width: 100%;
+            margin-bottom: 50px;
+        }
+        .basic-slider {
+            height: 300px;
+        }
+        .fade-slider {
+            height: 400px;
+        }
+        .cards-slider {
+            height: 350px;
+            padding: 20px;
+        }
+        .slider-description {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+        .swiper-slide {
+            text-align: center;
+            background: #f8f8f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
         .coverflow-slider {
             height: 400px;
             padding: 50px 0;
@@ -20,7 +56,58 @@
     </style>
 </head>
 <body>
-    <!-- Los tres sliders anteriores se mantienen igual -->
+        <div class="slider-description">
+        <h2>Slider Básico</h2>
+        <p>Un slider simple con navegación y paginación básica. Perfecto para presentaciones de imágenes estándar.</p>
+    </div>
+    
+    <!-- Slider básico -->
+    <div class="swiper basic-slider">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="/linktree/img/01.jpg" alt="Imagen 1"></div>
+            <div class="swiper-slide"><img src="/linktree/img/02.jpg" alt="Imagen 2"></div>
+            <div class="swiper-slide"><img src="/linktree/img/03.jpg" alt="Imagen 3"></div>
+            <div class="swiper-slide"><img src="/linktree/img/04.jpg" alt="Imagen 4"></div>
+            <div class="swiper-slide"><img src="/linktree/img/05.jpg" alt="Imagen 5"></div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+
+    <div class="slider-description">
+        <h2>Slider con Efecto Fade</h2>
+        <p>Este slider utiliza un efecto de desvanecimiento entre diapositivas para una transición más suave y elegante.</p>
+    </div>
+
+    <!-- Slider con efecto fade -->
+    <div class="swiper fade-slider">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="/linktree/img/01.jpg" alt="Imagen 1"></div>
+            <div class="swiper-slide"><img src="/linktree/img/02.jpg" alt="Imagen 2"></div>
+            <div class="swiper-slide"><img src="/linktree/img/03.jpg" alt="Imagen 3"></div>
+            <div class="swiper-slide"><img src="/linktree/img/04.jpg" alt="Imagen 4"></div>
+            <div class="swiper-slide"><img src="/linktree/img/05.jpg" alt="Imagen 5"></div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <div class="slider-description">
+        <h2>Slider de Tarjetas</h2>
+        <p>Un slider que muestra múltiples diapositivas simultáneamente con efecto de tarjetas. Ideal para galerías y portfolios.</p>
+    </div>
+
+    <!-- Slider de tarjetas -->
+    <div class="swiper cards-slider">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="/linktree/img/01.jpg" alt="Imagen 1"></div>
+            <div class="swiper-slide"><img src="/linktree/img/02.jpg" alt="Imagen 2"></div>
+            <div class="swiper-slide"><img src="/linktree/img/03.jpg" alt="Imagen 3"></div>
+            <div class="swiper-slide"><img src="/linktree/img/04.jpg" alt="Imagen 4"></div>
+            <div class="swiper-slide"><img src="/linktree/img/05.jpg" alt="Imagen 5"></div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
 
     <div class="slider-description">
         <h2>Slider con Efecto Coverflow</h2>
@@ -41,9 +128,62 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script>
-        // ... Inicializaciones anteriores ...
+        // Inicialización del slider básico
+        const basicSlider = new Swiper('.basic-slider', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            }
+        });
 
-        // Inicialización del nuevo slider coverflow
+        // Inicialización del slider con efecto fade
+        const fadeSlider = new Swiper('.fade-slider', {
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            },
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true
+            },
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false
+            }
+        });
+
+        // Inicialización del slider de tarjetas
+        const cardsSlider = new Swiper('.cards-slider', {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true
+            },
+            breakpoints: {
+                320: {
+                    slidesPerView: 1,
+                    spaceBetween: 20
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 30
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 30
+                }
+            }
+        });
+
+        // Inicialización del slider coverflow
         const coverflowSlider = new Swiper('.coverflow-slider', {
             effect: 'coverflow',
             grabCursor: true,
