@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiper.js Examples</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+    <style>
+        /* ... Estilos anteriores ... */
+        .coverflow-slider {
+            height: 400px;
+            padding: 50px 0;
+        }
+        .coverflow-slider .swiper-slide {
+            background-position: center;
+            background-size: cover;
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Los tres sliders anteriores se mantienen igual -->
+
+    <div class="slider-description">
+        <h2>Slider con Efecto Coverflow</h2>
+        <p>Un slider con efecto 3D que simula un carrusel de portadas, perfecto para mostrar imágenes destacadas con un efecto visual llamativo.</p>
+    </div>
+
+    <!-- Nuevo slider con efecto coverflow -->
+    <div class="swiper coverflow-slider">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="/linktree/img/01.jpg" alt="Imagen 1"></div>
+            <div class="swiper-slide"><img src="/linktree/img/02.jpg" alt="Imagen 2"></div>
+            <div class="swiper-slide"><img src="/linktree/img/03.jpg" alt="Imagen 3"></div>
+            <div class="swiper-slide"><img src="/linktree/img/04.jpg" alt="Imagen 4"></div>
+            <div class="swiper-slide"><img src="/linktree/img/05.jpg" alt="Imagen 5"></div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+        // ... Inicializaciones anteriores ...
+
+        // Inicialización del nuevo slider coverflow
+        const coverflowSlider = new Swiper('.coverflow-slider', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true
+            },
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false
+            }
+        });
+    </script>
+</body>
+</html>
