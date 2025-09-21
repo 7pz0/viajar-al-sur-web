@@ -126,8 +126,6 @@ body {
 .description-wrapper {
     position: relative;  /* Contexto de posicionamiento para el badge */
     flex-grow: 1;       /* Ocupa el espacio disponible */
-    display: flex;      /* Layout flexible */
-    flex-direction: column;  /* Elementos apilados verticalmente */
 }
 
 /* Contenedor de la descripción con efectos visuales */
@@ -156,26 +154,26 @@ body {
  */
 .publication-badge {
     position: absolute;           /* Posicionamiento absoluto */
-    top: -10px;                  /* Posición vertical (arriba del contenedor) */
-    right: -15px;                /* Posición horizontal (a la derecha) */
+    top: -5px;                   /* Posición vertical (ligeramente arriba) */
+    right: 10px;                 /* Posición horizontal (dentro del contenedor) */
     background-color: var(--badge-bg);  /* Color de fondo oscuro */
     color: var(--badge-text);    /* Color de texto blanco */
-    padding: 8px 12px;           /* Espaciado interno */
-    border-radius: 15px;         /* Bordes muy redondeados */
-    font-size: 0.75rem;          /* Tamaño de fuente pequeño */
+    padding: 6px 10px;           /* Espaciado interno más compacto */
+    border-radius: 12px;         /* Bordes redondeados */
+    font-size: 0.7rem;           /* Tamaño de fuente pequeño */
     font-weight: 700;            /* Texto en negrita */
     text-transform: uppercase;   /* Texto en mayúsculas */
-    letter-spacing: 0.5px;       /* Espaciado entre letras */
+    letter-spacing: 0.3px;       /* Espaciado entre letras */
     white-space: nowrap;         /* Evita salto de línea */
     z-index: 10;                 /* Asegura que esté por encima de otros elementos */
     
     /* Sombra diagonal personalizada */
     box-shadow: 
-        2px 2px 8px rgba(0, 0, 0, 0.3),      /* Sombra principal */
-        1px 1px 3px rgba(0, 0, 0, 0.5);      /* Sombra secundaria más intensa */
+        2px 2px 6px rgba(0, 0, 0, 0.4),      /* Sombra principal */
+        1px 1px 3px rgba(0, 0, 0, 0.6);      /* Sombra secundaria más intensa */
     
     /* Transformación para rotación ligera */
-    transform: rotate(8deg);     /* Rotación de 8 grados */
+    transform: rotate(5deg);     /* Rotación más sutil */
     
     /* Transición suave para efectos hover */
     transition: all 0.3s ease;
@@ -183,10 +181,10 @@ body {
 
 /* Efecto hover para el badge */
 .publication-badge:hover {
-    transform: rotate(8deg) scale(1.05);  /* Mantiene rotación y añade escala */
+    transform: rotate(5deg) scale(1.05);  /* Mantiene rotación y añade escala */
     box-shadow: 
-        3px 3px 12px rgba(0, 0, 0, 0.4),
-        2px 2px 5px rgba(0, 0, 0, 0.6);
+        3px 3px 10px rgba(0, 0, 0, 0.5),
+        2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
 /* Contenedor de los enlaces con layout vertical */
@@ -290,11 +288,11 @@ body {
      * Reduce tamaño y ajusta posición
      */
     .publication-badge {
-        font-size: 0.65rem;      /* Fuente más pequeña */
-        padding: 6px 10px;       /* Menos padding */
-        top: -8px;               /* Ajuste de posición vertical */
-        right: -10px;            /* Ajuste de posición horizontal */
-        transform: rotate(6deg); /* Rotación más sutil */
+        font-size: 0.6rem;       /* Fuente más pequeña */
+        padding: 4px 8px;        /* Menos padding */
+        top: -3px;               /* Ajuste de posición vertical */
+        right: 8px;              /* Mantiene posición dentro del contenedor */
+        transform: rotate(3deg); /* Rotación más sutil */
     }
 }
 
@@ -308,18 +306,13 @@ body {
 
     /* 
      * Ajustes del badge para tablets
-     * Cuando el layout cambia a columna, reposicionar el badge
+     * Mantiene posicionamiento absoluto pero ajustado
      */
     .publication-badge {
-        position: static;        /* Cambia a posición estática */
-        align-self: flex-end;    /* Se alinea al final del contenedor */
-        margin-top: 10px;        /* Espacio superior */
-        margin-bottom: 10px;     /* Espacio inferior */
-        transform: rotate(5deg); /* Rotación más sutil */
-    }
-    
-    .description-wrapper {
-        align-items: center;     /* Centra los elementos */
-        width: 100%;            /* Ocupa todo el ancho */
+        font-size: 0.65rem;      /* Tamaño intermedio */
+        padding: 5px 9px;        /* Padding intermedio */
+        top: -3px;               /* Posición vertical ajustada */
+        right: 10px;             /* Mantiene posición dentro */
+        transform: rotate(4deg); /* Rotación intermedia */
     }
 }
