@@ -129,26 +129,31 @@ body {
     line-height: 1.6;          /* Espaciado entre líneas */
     letter-spacing: 0.3px;     /* Espaciado entre letras */
     flex-grow: 1;              /* Ocupa el espacio disponible */
-    position: relative;        /* Para posicionamiento del badge */
-    overflow: hidden;          /* Oculta partes del badge que salen del contenedor */
+    position: relative;        /* CRÍTICO: Para posicionamiento del badge */
+    overflow: hidden;          /* CRÍTICO: Oculta partes del badge que salen del contenedor */
+    isolation: isolate;        /* Crea nuevo contexto de apilamiento */
 }
 
 /* Estilos para el badge diagonal */
 .description-badge {
     position: absolute;
-    top: 10px;
-    right: -30px;
+    top: 15px;
+    right: -35px;
     background: linear-gradient(45deg, var(--badge-start), var(--badge-end));
     color: white;
-    padding: 6px 35px;
-    font-size: 10px;
+    padding: 8px 40px;
+    font-size: 11px;
     font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     transform: rotate(45deg);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    z-index: 10;
+    transform-origin: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    z-index: 100;
     white-space: nowrap;
+    display: block;
+    width: auto;
+    height: auto;
 }
 
 /* Estilos específicos para párrafos en la descripción */
