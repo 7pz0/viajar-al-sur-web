@@ -1,0 +1,325 @@
+/*
+ * Estilos para la página de enlaces de Viajar al Sur
+ * Versión: 2.0
+ * Descripción: Define los estilos visuales para una página de tipo Linktree
+ * que incluye un logo, descripción y botones de enlace a redes sociales.
+ * Nuevo: Badge de "Última Publicación" con posicionamiento absoluto
+ * Características:
+ * - Diseño responsivo
+ * - Efectos de desenfoque (backdrop-filter)
+ * - Gradientes personalizados para cada red social
+ * - Animaciones en hover
+ * - Slideshow de fondo
+ * - Badge flotante con sombra diagonal
+ */
+
+/* Definición de variables de colores para uso global */
+:root {
+    /* Colores para gradientes de Instagram */
+    --instagram-start: #405DE6;  
+    --instagram-end: #E1306C;    
+    /* Colores para gradientes de Facebook */
+    --facebook-start: #4267B2;
+    --facebook-end: #2B4170;
+    /* Colores para gradientes de WhatsApp */
+    --whatsapp-start: #25D366;
+    --whatsapp-end: #128C7E;
+    /* Colores para gradientes del sitio web */
+    --web-start: #52B1E1;
+    --web-end: #40E0B5;
+    /* Colores para gradientes del email */
+    --email-start: #FF4D6D;
+    --email-end: #FF7A5C;
+    /* Colores para gradientes de YouTube */
+    --youtube-start: #FF0000;
+    --youtube-end: #CC0000;
+    /* Colores para el badge de publicación */
+    --badge-bg: #2d2d2d;
+    --badge-text: #ffffff;
+}
+
+/* Reset básico de estilos para todos los elementos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos generales del body */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    min-height: 80vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Contenedor para el slideshow de fondo */
+.background-slideshow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Estilos para cada imagen del slideshow */
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    object-fit: cover;
+}
+
+/* Contenedor principal de la página */
+.container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Sección de perfil con layout flexible */
+.profile-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: rgba(255, 255, 255, 0);
+    padding: 0.5rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Contenedor circular para el logo */
+.logo-container {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
+    border-radius: 50%;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Imagen del logo con ajustes específicos */
+.logo {
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* 
+ * NUEVO: Contenedor wrapper para la descripción
+ * Permite posicionamiento relativo del badge
+ */
+.description-wrapper {
+    position: relative;  /* Contexto de posicionamiento para el badge */
+    flex-grow: 1;       /* Ocupa el espacio disponible */
+    display: flex;      /* Layout flexible */
+    flex-direction: column;  /* Elementos apilados verticalmente */
+}
+
+/* Contenedor de la descripción con efectos visuales */
+.description {
+    margin-bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    font-weight: 300;
+    line-height: 1.6;
+    letter-spacing: 0.3px;
+}
+
+/* Estilos específicos para párrafos en la descripción */
+.description p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #ffffff;
+}
+
+/* 
+ * NUEVO: Badge de "Última Publicación"
+ * Elemento flotante con posicionamiento absoluto
+ */
+.publication-badge {
+    position: absolute;           /* Posicionamiento absoluto */
+    top: -10px;                  /* Posición vertical (arriba del contenedor) */
+    right: -15px;                /* Posición horizontal (a la derecha) */
+    background-color: var(--badge-bg);  /* Color de fondo oscuro */
+    color: var(--badge-text);    /* Color de texto blanco */
+    padding: 8px 12px;           /* Espaciado interno */
+    border-radius: 15px;         /* Bordes muy redondeados */
+    font-size: 0.75rem;          /* Tamaño de fuente pequeño */
+    font-weight: 700;            /* Texto en negrita */
+    text-transform: uppercase;   /* Texto en mayúsculas */
+    letter-spacing: 0.5px;       /* Espaciado entre letras */
+    white-space: nowrap;         /* Evita salto de línea */
+    z-index: 10;                 /* Asegura que esté por encima de otros elementos */
+    
+    /* Sombra diagonal personalizada */
+    box-shadow: 
+        2px 2px 8px rgba(0, 0, 0, 0.3),      /* Sombra principal */
+        1px 1px 3px rgba(0, 0, 0, 0.5);      /* Sombra secundaria más intensa */
+    
+    /* Transformación para rotación ligera */
+    transform: rotate(8deg);     /* Rotación de 8 grados */
+    
+    /* Transición suave para efectos hover */
+    transition: all 0.3s ease;
+}
+
+/* Efecto hover para el badge */
+.publication-badge:hover {
+    transform: rotate(8deg) scale(1.05);  /* Mantiene rotación y añade escala */
+    box-shadow: 
+        3px 3px 12px rgba(0, 0, 0, 0.4),
+        2px 2px 5px rgba(0, 0, 0, 0.6);
+}
+
+/* Contenedor de los enlaces con layout vertical */
+.links-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+/* Estilos base para todos los botones de enlace */
+.link-button {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(45deg, var(--web-start), var(--web-end));
+    transition: all 0.3s ease;
+    font-size: 1.1em;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Efectos al pasar el cursor sobre los botones */
+.link-button:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Ajustes para los iconos dentro de los botones */
+.link-button i {
+    margin-right: 15px;
+    font-size: 1.5em;
+}
+
+/* Estilos específicos para cada red social usando selectores de atributo */
+.link-button[href*="instagram"] {
+    background: linear-gradient(45deg, 
+        #833ab4 0%,
+        #fd1d1d 50%,
+        #f56040 100%
+    );
+}
+
+.link-button[href*="facebook"] {
+    background: linear-gradient(45deg, var(--facebook-start), var(--facebook-end));
+}
+
+.link-button[href*="wa.me"] {
+    background: linear-gradient(45deg, var(--whatsapp-start), var(--whatsapp-end));
+}
+
+.link-button[href*="mailto"] {
+    background: linear-gradient(45deg, var(--email-start), var(--email-end));
+}
+
+.link-button[href*="youtube"] {
+    background: linear-gradient(45deg, var(--youtube-start), var(--youtube-end));
+}
+
+/* Ajustes responsivos para dispositivos móviles */
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+
+    .logo-container {
+        width: 120px;
+        height: 120px;
+        padding: 8px;
+    }
+
+    .logo {
+        width: calc(100% - 16px);
+        height: calc(100% - 16px);
+    }
+
+    .link-button {
+        padding: 12px 15px;
+    }
+
+    .description {
+        font-size: 0.9rem;
+        padding: 10px;
+        width: 100%;
+        max-width: none;
+    }
+
+    .description p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    .links-container {
+        gap: 0.4rem;
+    }
+
+    /* 
+     * Ajustes del badge para móviles
+     * Reduce tamaño y ajusta posición
+     */
+    .publication-badge {
+        font-size: 0.65rem;      /* Fuente más pequeña */
+        padding: 6px 10px;       /* Menos padding */
+        top: -8px;               /* Ajuste de posición vertical */
+        right: -10px;            /* Ajuste de posición horizontal */
+        transform: rotate(6deg); /* Rotación más sutil */
+    }
+}
+
+/* Ajustes responsivos para tablets */
+@media (max-width: 768px) {
+    .profile-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    /* 
+     * Ajustes del badge para tablets
+     * Cuando el layout cambia a columna, reposicionar el badge
+     */
+    .publication-badge {
+        position: static;        /* Cambia a posición estática */
+        align-self: flex-end;    /* Se alinea al final del contenedor */
+        margin-top: 10px;        /* Espacio superior */
+        margin-bottom: 10px;     /* Espacio inferior */
+        transform: rotate(5deg); /* Rotación más sutil */
+    }
+    
+    .description-wrapper {
+        align-items: center;     /* Centra los elementos */
+        width: 100%;            /* Ocupa todo el ancho */
+    }
+}

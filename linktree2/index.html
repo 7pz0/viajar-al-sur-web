@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="/linktree/css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Slideshow de imágenes de fondo -->
     <div class="background-slideshow">
         <img class="background-image" src="/linktree/img/01.jpg" alt="">
         <img class="background-image" src="/linktree/img/02.jpg" alt="">
@@ -19,23 +20,32 @@
         <img class="background-image" src="/linktree/img/04.jpg" alt="">
         <img class="background-image" src="/linktree/img/05.jpg" alt="">
     </div>
+    
     <div class="container">
+        <!-- Sección de perfil con logo y descripción -->
         <div class="profile-section">
             <div class="logo-container">
                 <img src="/linktree/img/logo.jpg" alt="Viajar al Sur" class="logo">
             </div>
-            <div class="description">
-                <p>🌎 Turismo auténtico en el sur de Chile<br>
-                🏞️ Naturaleza, cultura y desconexión<br>
-                📍 Patagonia – Carretera Austral<br>
-                ✉️ Reservas y consultas DM<br>
-                🔗 viajaralsur.cl</p>
+            
+            <!-- Contenedor relativo para posicionar el badge -->
+            <div class="description-wrapper">
+                <div class="description">
+                    <p>🌎 Turismo auténtico en el sur de Chile<br>
+                    🏞️ Naturaleza, cultura y desconexión<br>
+                    📍 Patagonia – Carretera Austral<br>
+                    ✉️ Reservas y consultas DM<br>
+                    🔗 viajaralsur.cl</p>
+                </div>
+                
+                <!-- Badge de "Última Publicación" -->
+                <div class="publication-badge">
+                    ÚLTIMA PUBLICACIÓN!!
+                </div>
             </div>
-
-            <!-- Ribbon: Última publicación -->
-            <div class="ribbon" aria-hidden="true">ÚLTIMA PUBLICACIÓN!!</div>
         </div>
 
+        <!-- Contenedor de enlaces a redes sociales -->
         <div class="links-container">
             <a href="https://viajaralsur.cl" class="link-button">
                 <i class="fa fa-globe"></i>
@@ -66,6 +76,4 @@
 
     <script src="/linktree/js/slideshow.js"></script>
 </body>
-
 </html>
-
