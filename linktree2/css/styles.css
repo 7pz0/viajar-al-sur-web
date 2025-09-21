@@ -273,10 +273,19 @@ body {
 
     /* Ajustes del badge para móviles */
     .description-badge {
-        font-size: 9px;
-        padding: 5px 28px;
-        right: -25px;
-        top: 8px;
+        position: absolute;
+            top: 15px;
+            right: -35px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 8px 40px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transform: rotate(45deg);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 10;
     }
 }
 
