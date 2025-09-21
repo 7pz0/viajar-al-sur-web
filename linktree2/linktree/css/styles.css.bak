@@ -1,0 +1,253 @@
+/*
+ * Estilos para la página de enlaces de Viajar al Sur
+ * Versión: 1.0
+ * Descripción: Define los estilos visuales para una página de tipo Linktree
+ * que incluye un logo, descripción y botones de enlace a redes sociales.
+ * Características:
+ * - Diseño responsivo
+ * - Efectos de desenfoque (backdrop-filter)
+ * - Gradientes personalizados para cada red social
+ * - Animaciones en hover
+ * - Slideshow de fondo
+ */
+
+/* Definición de variables de colores para uso global */
+:root {
+    /* Colores para gradientes de Instagram */
+    --instagram-start: #405DE6;  
+    --instagram-end: #E1306C;    
+    /* Colores para gradientes de Facebook */
+    --facebook-start: #4267B2;
+    --facebook-end: #2B4170;
+    /* Colores para gradientes de WhatsApp */
+    --whatsapp-start: #25D366;
+    --whatsapp-end: #128C7E;
+    /* Colores para gradientes del sitio web */
+    --web-start: #52B1E1;
+    --web-end: #40E0B5;
+    /* Colores para gradientes del email */
+    --email-start: #FF4D6D;
+    --email-end: #FF7A5C;
+    /* Colores para gradientes de YouTube */
+    --youtube-start: #FF0000;    /* Rojo YouTube */
+    --youtube-end: #CC0000;      /* Rojo oscuro YouTube */
+}
+
+/* Reset básico de estilos para todos los elementos */
+* {
+    margin: 0;                  /* Elimina márgenes */
+    padding: 0;                 /* Elimina rellenos */
+    box-sizing: border-box;     /* Incluye padding y border en el ancho total */
+}
+
+/* Estilos generales del body */
+body {
+    font-family: 'Poppins', sans-serif; /* Fuente principal */
+    color: white;                        /* Color de texto */
+    min-height: 80vh;                    /* Altura mínima del viewport */
+    position: relative;                  /* Para posicionamiento de elementos hijos */
+    overflow-x: hidden;                  /* Oculta scroll horizontal */
+}
+
+/* Contenedor para el slideshow de fondo */
+.background-slideshow {
+    position: fixed;            /* Mantiene el fondo fijo durante el scroll */
+    top: 0;
+    left: 0;
+    width: 100%;               /* Cubre todo el ancho de la ventana */
+    height: 100%;              /* Cubre todo el alto de la ventana */
+    z-index: -1;               /* Asegura que esté detrás del contenido */
+}
+
+/* Estilos para cada imagen del slideshow */
+.background-image {
+    position: absolute;         /* Posicionamiento absoluto dentro del slideshow */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;                /* Inicio invisible para la transición */
+    transition: opacity 1s ease-in-out;  /* Transición suave de opacidad */
+    object-fit: cover;         /* Ajusta la imagen para cubrir todo el espacio */
+}
+
+/* Contenedor principal de la página */
+.container {
+    max-width: 680px;          /* Limita el ancho en pantallas grandes */
+    margin: 0 auto;            /* Centra el contenedor horizontalmente */
+    padding: 20px;             /* Espacio interior uniforme */
+    text-align: center;        /* Alinea el contenido al centro */
+}
+
+/* Sección de perfil con layout flexible */
+.profile-section {
+    display: flex;             /* Habilita el layout flexible */
+    align-items: center;       /* Alinea elementos verticalmente al centro */
+    gap: 1rem;                /* Reducido de 2rem a 1rem */
+    background-color: rgba(255, 255, 255, 0);  /* Fondo transparente */
+    padding: 0.5rem;          /* Espaciado interno pequeño */
+    border-radius: 1rem;      /* Bordes redondeados */
+    margin-bottom: 1rem;      /* Reducido de 2rem a 1rem */
+}
+
+/* Contenedor circular para el logo */
+.logo-container {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
+    border-radius: 50%;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    flex-shrink: 0;
+    display: flex;           /* Agregado para centrar el logo */
+    align-items: center;     /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+}
+
+/* Imagen del logo con ajustes específicos */
+.logo {
+    width: calc(100% - 20px);  /* Ancho adaptativo considerando el padding */
+    height: calc(100% - 20px); /* Alto adaptativo considerando el padding */
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Contenedor de la descripción con efectos visuales */
+.description {
+    margin-bottom: 0;         /* Eliminado el margin-bottom de 15px */
+    background: rgba(0, 0, 0, 0.5);  /* Fondo oscuro semitransparente */
+    padding: 15px;             /* Espacio interior uniforme */
+    border-radius: 10px;       /* Esquinas redondeadas */
+    backdrop-filter: blur(5px); /* Efecto de desenfoque del fondo */
+    font-weight: 300;          /* Texto ligero */
+    line-height: 1.6;          /* Espaciado entre líneas */
+    letter-spacing: 0.3px;     /* Espaciado entre letras */
+    flex-grow: 1;              /* Ocupa el espacio disponible */
+}
+
+/* Estilos específicos para párrafos en la descripción */
+.description p {
+    margin: 0;                /* Elimina margen */
+    font-size: 1rem;          /* Tamaño de texto */
+    line-height: 1.5;         /* Altura de línea */
+    color: #ffffff;              /* Color de texto */
+}
+
+/* Contenedor de los enlaces con layout vertical */
+.links-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;            /* Reducido de 1rem a 0.5rem */
+    margin-top: 1rem;
+}
+
+/* Estilos base para todos los botones de enlace */
+.link-button {
+    display: flex;          /* Layout flexible */
+    align-items: center;    /* Centrado vertical */
+    padding: 15px 20px;     /* Espacio interior */
+    border-radius: 10px;    /* Bordes redondeados */
+    text-decoration: none;  /* Elimina subrayado */
+    color: white;           /* Color de texto */
+    background: linear-gradient(45deg, var(--web-start), var(--web-end)); /* Gradiente */
+    transition: all 0.3s ease;  /* Simplificar las transiciones múltiples */
+    font-size: 1.1em;      /* Tamaño de texto */
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Sombra de texto */
+}
+
+/* Efectos al pasar el cursor sobre los botones */
+.link-button:hover {
+    transform: scale(1.02);    /* Ligero aumento de tamaño */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Sombra suave */
+}
+
+/* Ajustes para los iconos dentro de los botones */
+.link-button i {
+    margin-right: 15px;        /* Espacio a la derecha */
+    font-size: 1.5em;          /* Tamaño del icono */
+}
+
+/* Estilos específicos para cada red social usando selectores de atributo */
+.link-button[href*="instagram"] {
+    /* Gradiente característico de Instagram */
+    background: linear-gradient(45deg, 
+        #833ab4 0%,   /* Color inicial morado */
+        #fd1d1d 50%,  /* Color medio rojo */
+        #f56040 100%  /* Color final naranja */
+    );
+}
+
+/* Gradiente personalizado para Facebook */
+.link-button[href*="facebook"] {
+    background: linear-gradient(45deg, var(--facebook-start), var(--facebook-end));
+}
+
+/* Gradiente personalizado para WhatsApp */
+.link-button[href*="wa.me"] {
+    background: linear-gradient(45deg, var(--whatsapp-start), var(--whatsapp-end));
+}
+
+/* Gradiente personalizado para el sitio web */
+/*Eliminado este estilo*/
+/*.link-button[href*="viajaralsur.cl"]:not([href*="@"]) {
+    background: linear-gradient(45deg, var(--web-start), var(--web-end));
+}
+
+/* Gradiente personalizado para el email */
+.link-button[href*="mailto"] {
+    background: linear-gradient(45deg, var(--email-start), var(--email-end));
+}
+
+/* Gradiente personalizado para YouTube */
+.link-button[href*="youtube"] {
+    background: linear-gradient(45deg, var(--youtube-start), var(--youtube-end));
+}
+
+/* Ajustes responsivos para dispositivos móviles */
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;         /* Reduce el espacio en móviles */
+    }
+
+    .logo-container {
+        width: 120px;
+        height: 120px;
+        padding: 8px;        /* Reducido de 10px a 8px */
+    }
+
+    .logo {
+        width: calc(100% - 16px);   /* Ajustado al nuevo padding */
+        height: calc(100% - 16px);  /* Ajustado al nuevo padding */
+    }
+
+    .link-button {
+        padding: 12px 15px;    /* Botones más compactos en móviles */
+    }
+
+    .description {
+        font-size: 0.9rem;        /* Reduce el tamaño de fuente */
+        padding: 10px;            /* Reduce el padding para más espacio útil */
+        width: 100%;             /* Usa todo el ancho disponible */
+        max-width: none;         /* Elimina cualquier límite de ancho máximo */
+    }
+
+    .description p {
+        font-size: 0.9rem;       /* Ajusta el tamaño de texto de los párrafos */
+        line-height: 1.4;        /* Ajusta el espaciado entre líneas */
+    }
+
+    .links-container {
+        gap: 0.4rem;        /* Aún más compacto en móviles */
+    }
+}
+
+/* Ajustes responsivos para tablets */
+@media (max-width: 768px) {
+    .profile-section {
+        flex-direction: column;  /* Cambia a layout vertical */
+        text-align: center;      /* Centra el texto */
+        gap: 1rem;              /* Reduce el espacio entre elementos */
+    }
+}
