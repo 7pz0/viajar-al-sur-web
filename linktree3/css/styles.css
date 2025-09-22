@@ -285,6 +285,7 @@ body {
         flex-direction: column;  /* Cambia a layout vertical */
         text-align: center;      /* Centra el texto */
         gap: 1rem;              /* Reduce el espacio entre elementos */
+        font-size: 0.5em;
     }
     /* Ajustes del badge para tablet */
     .description-badge {
