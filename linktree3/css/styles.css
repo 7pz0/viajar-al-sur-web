@@ -272,8 +272,8 @@ body {
 
     /* Ajustes del badge para móviles */
     .description-badge {
-        font-size: 9px;
-        padding: 5px 28px;
+        font-size: 8px;
+        padding: 3px 20px;
         right: -25px;
         top: 8px;
     }
