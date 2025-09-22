@@ -293,4 +293,7 @@ body {
         right: -20px;
         top: 10px;
     }
+    .description {
+        padding: 25px;;
+    }
 }
