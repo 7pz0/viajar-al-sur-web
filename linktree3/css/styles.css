@@ -289,9 +289,9 @@ body {
     /* Ajustes del badge para tablet */
     .description-badge {
         font-size: 10px;
-        padding: 2px 30px;
+        padding: 2px 35px;
         right: -15px;
-        top: 15px;
+        top: 20px;
     }
     .description {
         padding: 25px 85px;
