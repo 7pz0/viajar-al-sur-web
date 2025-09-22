@@ -256,7 +256,7 @@ body {
 
     .description {
         font-size: 0.9rem;        /* Reduce el tamaño de fuente */
-        padding: 10px;            /* Reduce el padding para más espacio útil */
+        padding: 5px;            /* Reduce el padding para más espacio útil */
         width: 100%;             /* Usa todo el ancho disponible */
         max-width: none;         /* Elimina cualquier límite de ancho máximo */
     }
