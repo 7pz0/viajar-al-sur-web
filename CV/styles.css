@@ -1,0 +1,210 @@
+/* ===== ESTILOS PARA HOJA LETTER ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.hide {
+    display: none;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.4;
+    color: #333;
+    background-color: white;
+    width: 8.5in;
+    min-height: 11in;
+    margin: 0 auto;
+    padding: 1in 1in 1in 1in;
+    font-size: 11pt;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== GRUPO 1: ENCABEZADO PRINCIPAL ===== */
+header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 15pt;
+    align-items: start;
+    margin-bottom: 12pt;
+    padding-bottom: 10pt;
+    border-bottom: 1.5pt solid #2c5282;
+}
+
+.header-photo {
+    width: 90pt;
+    height: 90pt;
+    background-color: #f0f0f0;
+    border: 1pt solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8pt;
+    color: #666;
+    flex-shrink: 0;
+}
+
+.header-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.header-info h1 {
+    font-size: 18pt;
+    font-weight: bold;
+    color: #2c5282;
+    margin-bottom: 6pt;
+    line-height: 1.1;
+}
+
+.header-info > p {
+    font-size: 9.5pt;
+    color: #2c5282;
+    margin-bottom: 12pt;
+    font-weight: normal;
+    line-height: 1.1;
+}
+
+/* ===== GRUPO 2: INFORMACIÓN PERSONAL ESTRUCTURADA ===== */
+.contact-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2pt 15pt;
+    font-size: 9pt;
+    line-height: 1.3;
+}
+
+.contact-info p {
+    margin-bottom: 2pt;
+    color: #333;
+}
+
+.contact-info p strong {
+    color: #333;
+    font-weight: bold;
+}
+
+/* ===== GRUPO 3: SECCIONES PRINCIPALES ===== */
+main {
+    display: block;
+    flex: 1;
+}
+
+section {
+    margin-bottom: 12pt;
+    page-break-inside: avoid;
+}
+
+section h2 {
+    font-size: 12pt;
+    color: #2c5282;
+    font-weight: bold;
+    margin-bottom: 6pt;
+    border-bottom: 1pt solid #2c5282;
+    padding-bottom: 2pt;
+}
+
+/* ===== GRUPO 4: PÁRRAFOS DE CONTENIDO ===== */
+section p {
+    font-size: 9pt;
+    color: #333;
+    line-height: 1.3;
+    text-align: justify;
+    margin-bottom: 4pt;
+}
+
+/* ===== GRUPO 5: INFORMACIÓN DE EMPLEO/CERTIFICACIONES ===== */
+.job, .degree {
+    margin-bottom: 4pt;
+    padding: 4pt 0;
+    page-break-inside: avoid;
+}
+
+.job h3, .degree h3 {
+    font-size: 10pt;
+    color: #2c5282;
+    font-weight: bold;
+    margin-bottom: 2pt;
+    line-height: 1.2;
+}
+
+.job p, .degree p {
+    font-size: 9pt;
+    color: #333;
+    margin-bottom: 1pt;
+    line-height: 1.2;
+}
+
+.job p:first-of-type, .degree p:first-of-type {
+    font-style: italic;
+    color: #666;
+    font-weight: normal;
+}
+
+/* ===== LISTAS DE HABILIDADES ===== */
+#skills ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1pt 15pt;
+}
+
+#skills li {
+    padding: 3pt 0 3pt 10pt;
+    font-size: 9pt;
+    color: #333;
+    border-left: 2pt solid #2c5282;
+    margin-bottom: 1pt;
+    line-height: 1.1;
+}
+
+#skills li:last-child {
+    margin-bottom: 0;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    margin-top: auto;
+    padding-top: 15pt;
+    border-top: 1pt solid #ccc;
+    text-align: center;
+    page-break-inside: avoid;
+}
+
+.footer-content p {
+    margin-bottom: 4pt;
+    font-size: 9pt;
+    color: #666;
+}
+
+.update-date {
+    font-size: 8pt;
+    color: #999;
+}
+
+/* ===== ESTILOS PARA IMPRESIÓN ===== */
+@media print {
+    body {
+        background: white;
+        font-size: 10pt;
+        padding: 0.5in;
+    }
+    
+    header h1 {
+        font-size: 20pt;
+    }
+    
+    section h2 {
+        font-size: 12pt;
+    }
+    
+    .footer-content p {
+        font-size: 8pt;
+    }
+}

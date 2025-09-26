@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Felipe Bernardo Opazo Alvarado</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Estilos para navegación */
+        .page-container {
+            display: none;
+        }
+        
+        .page-container.active {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .nav-buttons {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn, .download-btn {
+            padding: 10px 20px;
+            background: #2c5282;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .nav-btn:hover, .download-btn:hover {
+            background: #1a365d;
+        }
+        
+        .nav-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .download-btn {
+            background: #28a745;
+        }
+        
+        .download-btn:hover {
+            background: #1e7e34;
+        }
+        
+        .page-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(44, 82, 130, 0.9);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            z-index: 1000;
+        }
+        
+        /* Estilos para impresión */
+        @media print {
+            .nav-buttons, .page-indicator {
+                display: none !important;
+            }
+            
+            .page-container {
+                display: flex !important;
+                flex-direction: column;
+                page-break-after: always;
+                min-height: 10in;
+            }
+            
+            .page-container:last-child {
+                page-break-after: auto;
+            }
+            
+            body {
+                padding: 0.5in;
+            }
+            
+            /* Ocultar header completo en página 2 para PDF */
+            #page-2 header {
+                display: none !important;
+            }
+            
+            /* Compensar margen superior en página 2 */
+            #page-2 main {
+                margin-top: 0.75in;
+            }
+            
+            /* Footer estático en la parte inferior para PDF */
+            footer {
+                margin-top: auto !important;
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Indicador de página -->
+    <div class="page-indicator">
+        Página <span id="current-page">1</span> de 2
+    </div>
+    
+    <!-- Botones de navegación -->
+    <div class="nav-buttons">
+        <button class="nav-btn" id="prev-btn" onclick="previousPage()" disabled>← Anterior</button>
+        <button class="nav-btn" id="next-btn" onclick="nextPage()">Siguiente →</button>
+        <button class="download-btn" onclick="downloadPDF()">📄 Descargar PDF</button>
+    </div>
+
+    <!-- PÁGINA 1 -->
+    <div class="page-container active" id="page-1">
+        <header>
+            <div class="header-photo">
+                [Foto Felipe]
+            </div>
+            <div class="header-info">
+                <h1>Felipe Bernardo Opazo Alvarado</h1>
+                <p>Piloto ROV | Patrón de Nave Menor | Administración de empresas | Guía de Turismo</p>
+                <div class="contact-info">
+                    <p>Correo: opazofb@gmail.com</p>
+                    <p>Contacto: +56 9 5647 1214</p>
+                    <p>Edad: 29 Años</p>
+                    <p>Estado Civil: Soltero</p>
+                    <p>Residencia: Quellón, Región de Los Lagos</p>
+                    <p>Disponibilidad: Inmediata</p>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <section id="about">
+                <h2>Perfil Profesional</h2>
+                <p>Operador ROV en centros de cultivo y tripulante de Nave Menor desde 2022 en región X, XI y XII. Con conocimientos en maniobras en embarcaciones y operación técnica de equipos actuales en robótica. Con formación técnica en administración de empresas y turismo. Estudiante autodidacta de Tecnologías emergentes (Inteligencia artificial | Automatización | IoT | Python | Front-end). Actualmente certificando conocimientos en Rubro marítimo.</p>
+            </section>
+            
+            <section id="experience">
+                <h2>Resumen Laboral rubro marítimo</h2>
+                <div class="job">
+                    <h3>Tripulante de Nave Menor y Asistente: Embarcaciones Región de Aysén y Magallanes</h3>
+                    <p>Región de Aysén - Desde 2023 - Actualidad</p>
+                    <p>Maniobras y habitabilidad como equipo de navegación en apoyo a centros de cultivo y faenas acuícolas. (Cabotaje y transporte). Tripulante para empresas ROV Falcon (Under Deep) y Manta (Badinotti). Apoyo en mantención de equipos y contingencias.</p>
+                </div>
+            </section>
+            
+            <section id="education">
+                <h2>Certificaciones técnicas y habilidades</h2>
+                <div class="degree">
+                    <h3>Patrón de Nave Menor</h3>
+                    <p>Familiarización a bordo | Piloto ROV (Matrícula vigente hasta diciembre de 2026)</p>
+                </div>
+                <div class="degree">
+                    <h3>Técnico nivel medio en Administración de Empresas</h3>
+                </div>
+                <div class="degree">
+                    <h3>Guía de turismo general</h3>
+                </div>
+                <div class="degree">
+                    <h3>Manejo avanzado de herramientas de diseño</h3>
+                    <p>Adobe/ Office/ Google Cloud</p>
+                </div>
+                <div class="degree">
+                    <h3>Programación web front-end</h3>
+                    <p>Capacidad de programación en Python y VB para automatizar procesos</p>
+                </div>
+                <div class="degree">
+                    <h3>Inglés</h3>
+                    <p>Lectura y habla avanzada / escritura medio</p>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <div class="footer-content">
+                <p class="update-date">Hoja 1 de 2 - CV actualizado: 26 de Septiembre 2025</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- PÁGINA 2 -->
+    <div class="page-container" id="page-2">
+        <header>
+            <div class="header-photo hide">
+                [Foto Felipe]
+            </div>
+            <div class="header-info">
+                <h1>Felipe Bernardo Opazo Alvarado</h1>
+                <p>Piloto ROV | Patrón de Nave Menor | Administración de empresas | Guía de Turismo</p>
+                <div class="contact-info">
+                    <p>Correo: opazofb@gmail.com</p>
+                    <p>Contacto: +56 9 5647 1214</p>
+                    <p>Edad: 29 Años</p>
+                    <p>Estado Civil: Soltero</p>
+                    <p>Residencia: Quellón, Región de Los Lagos</p>
+                    <p>Disponibilidad: Inmediata</p>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <section id="work-history">
+                <h2>Historial laboral</h2>
+                
+                <div class="job">
+                    <h3>Operador Piloto ROV</h3>
+                    <p>Acrima Río Malleco - Región de Magallanes</p>
+                    <p>Julio 2025 – Septiembre 2025</p>
+                    <p>Operación ROV en inspección de estructura submarina. Aqua Chile, Magallanes. Sector Puerto Natales.</p>
+                </div>
+                
+                <div class="job">
+                    <h3>Auditor Nocturno – Área de operaciones</h3>
+                    <p>Hotel Loberías del Sur – Chacabuco</p>
+                    <p>Enero 2025 – Mayo 2025</p>
+                    <p>Gestión contable y apoyo en logística de zarpes y excursiones marítimas. Resolución de situaciones críticas y atención de pasajeros.</p>
+                </div>
+                
+                <div class="job">
+                    <h3>Asistente de Piloto ROV</h3>
+                    <p>Aysén ROV – Región de Aysén</p>
+                    <p>Junio 2024 – Agosto 2024</p>
+                    <p>Operación de equipos DTG2, DTG3, Revolution y Fifish en entornos acuícolas. Inspección de redes y estructuras de cultivo acuícola. Elaboración de informe interactivo en InDesign.</p>
+                </div>
+                
+                <div class="job">
+                    <h3>Ejecutivo de Atención Técnica y Comercial</h3>
+                    <p>Telefónica del Sur – Coyhaique</p>
+                    <p>Marzo 2022 – Julio 2022</p>
+                    <p>Atención y resolución de incidencias comerciales, y ventas de servicios residenciales.</p>
+                </div>
+                
+                <div class="job">
+                    <h3>Emprendedor – Producción y Venta de Artículos Personalizado</h3>
+                    <p>Negocio propio – Coyhaique</p>
+                    <p>Enero 2018 – Diciembre 2021</p>
+                    <p>Diseño, producción, ventas y gestión de negocio. Manejo de inventario, promoción digital y atención al cliente.</p>
+                </div>
+                
+                <div class="job">
+                    <h3>Colaborador Integral Retail</h3>
+                    <p>FashionSpark – Coyhaique</p>
+                    <p>Noviembre 2019 – Noviembre 2020</p>
+                    <p>Atención de clientes, reposición, vitrinas y cierre de caja.</p>
+                </div>
+                
+                <div class="job">
+                    <h3>Recepcionista y Asistente Administración</h3>
+                    <p>Hotelera San Rafael – Coyhaique</p>
+                    <p>Enero 2014 – Octubre 2019</p>
+                    <p>Atención a huéspedes, reservas y soporte administrativo general.</p>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <div class="footer-content">
+                <p class="update-date">Hoja 2 de 2 - CV actualizado: 26 de Septiembre 2025</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const totalPages = 2;
+
+        function showPage(pageNum) {
+            // Ocultar todas las páginas
+            document.querySelectorAll('.page-container').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Mostrar página actual
+            document.getElementById(`page-${pageNum}`).classList.add('active');
+            
+            // Actualizar indicador
+            document.getElementById('current-page').textContent = pageNum;
+            
+            // Actualizar botones
+            document.getElementById('prev-btn').disabled = pageNum === 1;
+            document.getElementById('next-btn').disabled = pageNum === totalPages;
+            
+            currentPage = pageNum;
+        }
+
+        function nextPage() {
+            if (currentPage < totalPages) {
+                showPage(currentPage + 1);
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                showPage(currentPage - 1);
+            }
+        }
+
+        function downloadPDF() {
+            window.print();
+        }
+
+        // Navegación con teclado
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                previousPage();
+            } else if (e.key === 'ArrowRight') {
+                nextPage();
+            }
+        });
+    </script>
+</body>
+</html>
