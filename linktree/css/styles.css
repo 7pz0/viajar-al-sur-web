@@ -154,13 +154,25 @@ body {
     background: linear-gradient(45deg, var(--web-start), var(--web-end)); /* Gradiente */
     transition: all 0.3s ease;  /* Simplificar las transiciones múltiples */
     font-size: 1.1em;      /* Tamaño de texto */
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Sombra de texto */
+    /*
+     * Sombra tipo "Sombra paralela" inspirada en el editor de imágenes
+     * Valores de referencia (captura): Opacidad 46%, Ángulo -34°, Distancia 5px, Dispersión 22%, Tamaño 8px
+     * Conversión aproximada a CSS box-shadow:
+     *  - offset-x ≈ cos(-34°) * 5 ≈ 4px
+     *  - offset-y ≈ sin(-34°) * 5 ≈ -3px (negativo = hacia arriba en CSS)
+     *  - blur-radius = 8px ("Tamaño")
+     *  - spread-radius ≈ 22% de 8px ≈ 2px (aprox., ya que Photoshop "Spread" no mapea 1:1)
+     */
+    box-shadow: 4px -3px 8px 2px rgba(0, 0, 0, 0.46);
+    /* Sombra de texto coordinada con la de caja */
+    text-shadow: 4px -3px 8px rgba(0, 0, 0, 0.46);
 }
 
 /* Efectos al pasar el cursor sobre los botones */
 .link-button:hover {
     transform: scale(1.02);    /* Ligero aumento de tamaño */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Sombra suave */
+    /* Mantiene la dirección de la sombra y la intensifica sutilmente al hacer hover */
+    box-shadow: 5px -4px 12px 2px rgba(0, 0, 0, 0.42);
 }
 
 /* Ajustes para los iconos dentro de los botones */
@@ -251,3 +263,8 @@ body {
         gap: 1rem;              /* Reduce el espacio entre elementos */
     }
 }
+
+/* Utilidades: sombra tipo Photoshop para reutilizar */
+.shadow-ps { box-shadow: 4px -3px 8px 2px rgba(0, 0, 0, 0.46); }
+.shadow-ps-text { text-shadow: 4px -3px 8px rgba(0, 0, 0, 0.46); }
+.shadow-ps-hover:hover { box-shadow: 5px -4px 12px 2px rgba(0, 0, 0, 0.42); }

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enlaces - Viajar al Sur</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Contenedor principal que centra y limita el ancho del contenido */
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Contenedor del slideshow de fondo */
+        .bg-slideshow {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1; /* Coloca el fondo detrás del contenido */
+            overflow: hidden;
+        }
+
+        /* Estilo para cada slide individual del fondo */
+        .bg-slide {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-size: cover; /* Asegura que la imagen cubra todo el espacio */
+            background-position: center center;
+            opacity: 0; /* Inicialmente invisible */
+            transition: opacity 1s ease; /* Efecto de transición suave */
+        }
+
+        /* Clase que hace visible el slide activo */
+        .bg-slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        /* Contenedor principal de los enlaces */
+        .linktree-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Sección del perfil con imagen y título */
+        .linktree-profile {
+            margin-bottom: 2rem;
+        }
+        
+        /* Estilo de la imagen de perfil circular */
+        .linktree-profile img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+        
+        /* Contenedor de los enlaces en disposición vertical */
+        .linktree-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        /* Estilo de cada botón de enlace */
+        .linktree-link {
+            display: block;
+            padding: 1rem 2rem;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease; /* Transición suave para efectos hover */
+        }
+        
+        .linktree-link:hover {
+            background: #007bff;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Estilo de texto general */
+        body {
+            font-family: 'Arial', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .linktree-profile h1 {
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .linktree-profile p {
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenedor del slideshow de imágenes de fondo -->
+    <div class="bg-slideshow" aria-hidden="true">
+        <!-- Slides individuales con imágenes de Picsum -->
+        <div class="bg-slide" style="background-image: url('https://picsum.photos/id/1018/1024/768');"></div>
+        <div class="bg-slide" style="background-image: url('https://picsum.photos/id/1025/1024/768');"></div>
+        <div class="bg-slide" style="background-image: url('https://picsum.photos/id/1039/1024/768');"></div>
+        <div class="bg-slide" style="background-image: url('https://picsum.photos/id/1043/1024/768');"></div>
+        <div class="bg-slide" style="background-image: url('https://picsum.photos/id/1056/1024/768');"></div>
+    </div>
+
+    <!-- Contenedor principal del árbol de enlaces -->
+    <div class="linktree-container">
+        <!-- Sección de perfil con logo y título -->
+        <div class="linktree-profile">
+            <img src="imgs/logo.jpg" alt="Viajar al Sur">
+            <h1>Viajar al Sur</h1>
+            <p>Todos nuestros enlaces en un solo lugar</p>
+        </div>
+        
+        <!-- Lista de enlaces sociales -->
+        <div class="linktree-links">
+            <a href="index.html" class="linktree-link">🏠 Sitio Web Principal</a>
+            <a href="#" class="linktree-link">📧 Contacto</a>
+            <a href="#" class="linktree-link">📱 Instagram</a>
+            <a href="#" class="linktree-link">📘 Facebook</a>
+            <a href="#" class="linktree-link">🐦 Twitter</a>
+            <a href="#" class="linktree-link">📺 YouTube</a>
+            <a href="#" class="linktree-link">💼 LinkedIn</a>
+        </div>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.bg-slide');
+        let current = 0;
+        let slideInterval;
+
+        // Función única para manejar la precarga y mostrar las imágenes
+        function handleSlideshow() {
+            // Precarga y manejo de errores
+            slides.forEach(slide => {
+                const bgImage = slide.style.backgroundImage.replace(/url\(['"](.+)['"]\)/, '$1');
+                const img = new Image();
+                img.src = bgImage;
+                img.onerror = () => slide.style.backgroundColor = '#f8f9fa';
+            });
+
+            // Iniciar slideshow
+            showSlide(current);
+            slideInterval = setInterval(() => {
+                current = (current + 1) % slides.length;
+                showSlide(current);
+            }, 5000);
+        }
+
+        function showSlide(idx) {
+            slides.forEach((slide, i) => slide.classList.toggle('active', i === idx));
+        }
+
+        // Manejo de visibilidad de página
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                clearInterval(slideInterval);
+            } else {
+                handleSlideshow();
+            }
+        });
+
+        // Inicialización
+        handleSlideshow();
+    </script>
+</body>
+</html>
