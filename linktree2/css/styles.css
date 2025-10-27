@@ -57,10 +57,7 @@ body {
     width: 100%;
     padding: 20px;
     text-align: center;
-    background: rgba(0, 0, 0, 0.4);
     border-radius: 20px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .profile-section {
@@ -93,7 +90,7 @@ body {
     height: calc(100% - 20px);
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid white;
+    border: 3px solid rgba(255,255,255,0.4); /* Transparencia 0.5 */
 }
 
 .description {
@@ -121,8 +118,8 @@ body {
 /* Badge ULTIMO mejorado y movido a la derecha */
 .badge {
     position: absolute;
-    top: 8px;
-    right: -38px; /* Movido 38px más a la derecha (aprox. 1 cm) */
+    top: 0px;
+    right: -27px; /* Movido 38px más a la derecha (aprox. 1 cm) */
     background: linear-gradient(45deg, #ff3333, #cc0000);
     color: white;
     padding: 4px 12px;
