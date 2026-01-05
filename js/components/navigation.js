@@ -6,6 +6,12 @@ class Navigation {
         this.navMenu = document.querySelector('.nav__menu');
         this.navLinks = document.querySelectorAll('.nav__link');
         this.header = document.querySelector('.header');
+
+        // Regions overlay elements
+        this.regionsOverlay = document.querySelector('.nav__overlay');
+        this.regionsPanel = document.querySelector('.regions-panel');
+        this.regionsClose = document.querySelector('.regions-close');
+        this.regionLinks = this.regionsOverlay ? this.regionsOverlay.querySelectorAll('.link-button[data-region]') : [];
         
         this.init();
     }
@@ -19,10 +25,14 @@ class Navigation {
     }
 
     bindEvents() {
-        // Mobile menu toggle
+        // Mobile menu toggle or regions overlay on small screens
         if (this.navToggle) {
             this.navToggle.addEventListener('click', () => {
-                this.toggleMobileMenu();
+                if (this.regionsOverlay && window.innerWidth <= 768) {
+                    this.toggleRegionsOverlay();
+                } else {
+                    this.toggleMobileMenu();
+                }
             });
         }
 
@@ -35,6 +45,7 @@ class Navigation {
                 if (targetId.startsWith('#')) {
                     this.scrollToSection(targetId);
                     this.closeMobileMenu();
+                    this.closeRegionsOverlay();
                 }
             });
         });
@@ -52,10 +63,30 @@ class Navigation {
             }
         });
 
+        // Regions overlay close handlers
+        if (this.regionsClose) {
+            this.regionsClose.addEventListener('click', () => this.closeRegionsOverlay());
+        }
+
+        if (this.regionsOverlay) {
+            // Click outside to close overlay
+            this.regionsOverlay.addEventListener('click', (e) => {
+                if (e.target === this.regionsOverlay) this.closeRegionsOverlay();
+            });
+
+            // Close on Esc
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && this.regionsOverlay.classList.contains('open')) {
+                    this.closeRegionsOverlay();
+                }
+            });
+        }
+
         // Handle resize
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
                 this.closeMobileMenu();
+                if (this.regionsOverlay) this.closeRegionsOverlay();
             }
         });
     }
@@ -123,6 +154,32 @@ class Navigation {
                 }
             }
         });
+    }
+
+    /* Regions overlay helpers */
+    toggleRegionsOverlay() {
+        if (!this.regionsOverlay) return;
+        if (this.regionsOverlay.classList.contains('open')) this.closeRegionsOverlay();
+        else this.openRegionsOverlay();
+    }
+
+    openRegionsOverlay() {
+        if (!this.regionsOverlay) return;
+        this.regionsOverlay.classList.add('open');
+        this.navToggle.setAttribute('aria-expanded', 'true');
+        this.regionsOverlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        const first = this.regionsOverlay.querySelector('.link-button');
+        if (first) first.focus();
+    }
+
+    closeRegionsOverlay() {
+        if (!this.regionsOverlay) return;
+        this.regionsOverlay.classList.remove('open');
+        this.navToggle.setAttribute('aria-expanded', 'false');
+        this.regionsOverlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        this.navToggle.focus();
     }
 
     // Public method to programmatically navigate
