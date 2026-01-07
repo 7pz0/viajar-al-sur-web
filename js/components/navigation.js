@@ -69,6 +69,11 @@ class Navigation {
         }
 
         if (this.regionsOverlay) {
+            // Move overlay under body to avoid stacking context issues (if not already)
+            if (this.regionsOverlay.parentNode !== document.body) {
+                document.body.appendChild(this.regionsOverlay);
+            }
+
             // Click outside to close overlay
             this.regionsOverlay.addEventListener('click', (e) => {
                 if (e.target === this.regionsOverlay) this.closeRegionsOverlay();
@@ -78,6 +83,29 @@ class Navigation {
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && this.regionsOverlay.classList.contains('open')) {
                     this.closeRegionsOverlay();
+                }
+            });
+
+            // Close overlay when clicking on a region link
+            this.regionLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    this.closeRegionsOverlay();
+                });
+            });
+
+            // Focus trap: keep focus inside overlay when open
+            this.regionsOverlay.addEventListener('keydown', (e) => {
+                if (e.key !== 'Tab') return;
+                const focusables = Array.from(this.regionsOverlay.querySelectorAll(this._focusable)).filter(el => !el.hasAttribute('disabled') && el.offsetParent !== null);
+                if (!focusables.length) return;
+                const first = focusables[0];
+                const last = focusables[focusables.length - 1];
+                if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
+                } else if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
                 }
             });
         }
