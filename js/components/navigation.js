@@ -45,7 +45,6 @@ class Navigation {
                 if (targetId.startsWith('#')) {
                     this.scrollToSection(targetId);
                     this.closeMobileMenu();
-                    this.closeRegionsOverlay();
                 }
             });
         });
@@ -63,11 +62,6 @@ class Navigation {
             }
         });
 
-        // Regions overlay close handlers
-        if (this.regionsClose) {
-            this.regionsClose.addEventListener('click', () => this.closeRegionsOverlay());
-        }
-
         if (this.regionsOverlay) {
             // Move overlay under body to avoid stacking context issues (if not already)
             if (this.regionsOverlay.parentNode !== document.body) {
@@ -77,20 +71,6 @@ class Navigation {
             // Click outside to close overlay
             this.regionsOverlay.addEventListener('click', (e) => {
                 if (e.target === this.regionsOverlay) this.closeRegionsOverlay();
-            });
-
-            // Close on Esc
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && this.regionsOverlay.classList.contains('open')) {
-                    this.closeRegionsOverlay();
-                }
-            });
-
-            // Close overlay when clicking on a region link
-            this.regionLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    this.closeRegionsOverlay();
-                });
             });
 
             // Focus trap: keep focus inside overlay when open

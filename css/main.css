@@ -332,19 +332,7 @@ html {
   opacity: 1;
 }
 
-/* Close button */
-.regions-close {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  background: transparent;
-  border: 0;
-  font-size: 1.6rem;
-  line-height: 1;
-  color: var(--text-color);
-  padding: .4rem;
-  border-radius: 8px;
-}
+
 
 /* Linktree-like buttons */
 .links-container {
